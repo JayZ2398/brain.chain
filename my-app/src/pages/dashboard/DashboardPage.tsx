@@ -1,29 +1,50 @@
-import Card from "@material-ui/core/Card";
+import react from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 
-import { Subject } from "../../shared/models";
+import { Subject, Squad } from "../../shared/models";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
-import { subjects } from "../../shared/data";
+import { subjects, tasks, squads } from "../../shared/data";
+import SubjectCard from "../../pages/subjects/ui/SubjectCard";
+import { getPriorityTask } from "../tasks/funcs";
+import { RequireField } from "../../shared/types";
 
 export default function DashboardPage() {
+  // TODO: why type no worky?
+  // const squadsWithSubjects: RequireField<Squad, 'subject'> = squads.map((s) => ({
+  const squadsWithSubjects: any = squads.map((s) => ({
+    ...s,
+    // this is a required one-one relationship, so it is never undefined
+    subject: subjects.find((subj) => subj.id === s.subjectId) as Subject,
+  }));
+
   return (
-    <>
-      <Container maxWidth="md">
-        <Grid container spacing={3}>
-          {subjects.map((subject: any) => (
+    <Container maxWidth={"md"}>
+      <Grid container spacing={6} direction="column">
+        <Grid item>
+          <Typography variant="h3">Subjects</Typography>
+        </Grid>
+        <Grid item container spacing={3}>
+          {squadsWithSubjects.map((squad: RequireField<Squad, "subject">) => (
             <Grid item xs={6}>
-              <Card>
-                <Typography variant="h3">{subject.name}</Typography>
-                <Typography>{subject.due}</Typography>
-                <Typography>{subject.taskName}</Typography>
-              </Card>
+              <SubjectCard
+                subject={squad.subject}
+                highlightedTask={getPriorityTask(
+                  tasks.filter((t) => t.squadId === squad.id)
+                )}
+              />
             </Grid>
           ))}
         </Grid>
-        <LinearProgressWithLabel value={80} />
-        <Grid container>
+
+        <Grid item>
+          <Typography variant="h3">Progress</Typography>
+        </Grid>
+        <Grid item>
+          <LinearProgressWithLabel value={80} />
+        </Grid>
+        <Grid item container>
           <Grid item xs={12}>
             <img
               width="100%"
@@ -32,7 +53,7 @@ export default function DashboardPage() {
             />
           </Grid>
         </Grid>
-      </Container>
-    </>
+      </Grid>
+    </Container>
   );
 }
