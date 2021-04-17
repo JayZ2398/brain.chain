@@ -30,7 +30,7 @@ const squads: SquadModel[] = [
       },
       {
         id: 'task-2',
-        name: 'What is photosynthesis',
+        name: 'What does pythag\'s theorem mean?',
         text: 'Last week we explored plant biology, what does this word mean?',
 
         comments: [],

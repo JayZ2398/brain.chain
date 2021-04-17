@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useState, useEffect } from 'react';
 import Tab from '@material-ui/core/Tab';
 
 import { Squad as SquadModel } from '../../../shared/models';
-import VerticalTabs from '../../../shared/components/mui/TabPanels';
+import VerticalTabs, { TabPanel } from '../../../shared/components/mui/TabPanels';
 import Task from '../../tasks/ui/Task';
 import { getTaskDisplayName } from '../../tasks/funcs';
 
@@ -20,11 +20,14 @@ function Squad({
   const [activeTask, setActiveTask] = useState<string | undefined>();
   useEffect(() => {
     if (!activeTask && squad && squad.tasks && squad.tasks.length > 0) {
+      console.log('setting active task');
       setActiveTask(squad.tasks[0].id);
     }
   }, [JSON.stringify(squad)]);
 
   if (!squad || squadLoading || !activeTask) return <div>loading</div>;
+
+  console.log('activeTask', activeTask);
   return (
     <VerticalTabs
       activeTabId={activeTask as string}
@@ -33,7 +36,11 @@ function Squad({
         <Tab label={getTaskDisplayName(t)} id={t.id} />
       ))}
       tabPanels={squad.tasks.map((t) => (
-        <Task taskLoading={squadLoading} task={t} />
+        <TabPanel
+          id={t.id}
+        >
+          <Task taskLoading={squadLoading} task={t} />
+        </TabPanel>
       ))}
     />
   );
