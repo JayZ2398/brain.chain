@@ -5,6 +5,9 @@ import {
   Route,
 } from 'react-router-dom';
 import logo from './logo.svg';
+
+import Squads from './pages/squads/Squads.tsx';
+
 import './App.css';
 
 function About() {
@@ -62,6 +65,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/squads">
+            <Squads />
           </Route>
           <Route path="/">
             <Home />
