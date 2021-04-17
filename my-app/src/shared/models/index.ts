@@ -1,19 +1,17 @@
-export type type<TObj = {}, TId = string> = TObj & { id: TId };
+export type WithId<TObj = {}, TId = string> = TObj & { id: TId };
 
-export type Subject = type & SubjectData;
-export type SubjectData = {
+export type Subject = WithId & {
   name: string;
-  users?: User[]
+  users: User[];
 };
 
-export type Squad = type & SquadData;
-export type SquadData = {
+export type Squad = WithId & {
   name: string;
   displayPicture?: string;
 
   users: User[];
-  classId?: string;
-  class?: Subject;
+  subjectId: string;
+  subject?: Subject;
   tasks: Task[];
 };
 
@@ -22,29 +20,30 @@ export type Account = {
   password: string;
 };
 
-export type User = type & UserData;
-export type UserData = {
+export type User = WithId & {
   name: string;
-  email?: string;
   displayPicture?: string;
+  email: string;
 
-  subjects: Subject[];
+  subjects?: Subject[];
+  subjectIds?: string[];
+  squadIds?: string[];
   squads: Squad[];
-  comments?: String[]
-
+  commentIds?: string[];
+  comments?: Comment[];
 };
 
-export type Task = type & TaskData;
-export type TaskData = {
+export type Task = WithId & {
   name: string;
   text: string;
+
+  squadId: string;
+  squad?: Squad;
   comments: Comment[];
   due?: string;
 };
 
-export type Comment = type & CommentData;
-export type CommentData = {
-  author: User;
-  text: string;
+export type Comment = WithId & {
   isQuestion: boolean;
+  text: string;
 };

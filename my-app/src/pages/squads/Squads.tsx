@@ -1,63 +1,42 @@
 import React, { PropsWithChildren, useState } from "react";
 import { Box } from "@material-ui/core";
 import styled from "styled-components";
+import { useDispatch, useEquivSelector } from "../../shared/redux/hooks";
 
 import SubjectSelect from "../../pages/subjects/ui/SubjectSelect";
 import Squad from "./ui/Squad";
-import { Squad as SquadModel } from "../../shared/models";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
+import { squads, subjects } from "../../shared/data";
+import { Squad as SquadModel } from "../../shared/models";
+import { actions, selectActiveSquad } from "../../pages/squads/slice";
+import { unwrapValueThen } from "../../shared/js";
 
 const Outerlayout = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: min-content 1fr;
-  grid-gap: 32px 16px;
+  grid-template-columns: minmax(0, auto) 1fr;
+  grid-template-rows: min-content min-content 1fr;
+  grid-template-areas:
+    "subject-select progress"
+    "task-nav       meet-squad"
+    "filler         tasks";
+  grid-gap: 5vh 5vw;
 `;
 
 type SquadsProps = PropsWithChildren<{}>;
 
-const squads: SquadModel[] = [
-  {
-    id: "squad-1",
-    name: "BioBrains",
-    users: [
-      {
-        id: "user-1",
-        name: "John",
-        subjects: [],
-        squads: [],
-        comments: [],
-      },
-    ],
-    tasks: [
-      {
-        id: "task-1",
-        name: "What is photosynthesis",
-        text: "Last week we explored plant biology, what does this word mean?",
-
-        comments: [],
-      },
-      {
-        id: "task-2",
-        name: "What does pythag's theorem mean?",
-        text: "Last week we explored plant biology, what does this word mean?",
-
-        comments: [],
-      },
-    ],
-  },
-];
-const defaultActiveSquad = squads[0].id;
-
 function Squads({ children, ...rest }: SquadsProps) {
-  const [activeSquadId, setActiveSquadId] = useState<string | undefined>(
-    defaultActiveSquad
-  );
+  const usersSubjects = subjects;
+  const usersSquads = squads;
+
+  const activeSquadId = useEquivSelector(selectActiveSquad);
+  const dispatch = useDispatch();
+  const setActiveSquadId = (x: string | undefined) =>
+    dispatch(actions.setActiveSquadId(x));
 
   let activeSquad: SquadModel | undefined;
   if (activeSquadId) {
-    const s = squads.find((x) => x.id === activeSquadId);
+    const s = usersSquads.find((x) => x.id === activeSquadId);
     if (s) activeSquad = s;
     else {
       throw new Error(
@@ -68,7 +47,15 @@ function Squads({ children, ...rest }: SquadsProps) {
 
   return (
     <Outerlayout>
-      <SubjectSelect />
+      <SubjectSelect
+        value={usersSubjects.find((s) => s.id === activeSquad?.subjectId)?.id}
+        onChange={unwrapValueThen((subjId) => {
+          const userSquadForSubject = usersSquads.find(
+            (s) => s.subjectId === subjId
+          )?.id;
+          setActiveSquadId(userSquadForSubject);
+        })}
+      />
 
       <LinearProgressWithLabel value={80} />
 

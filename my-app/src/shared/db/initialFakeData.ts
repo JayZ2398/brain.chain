@@ -12,8 +12,9 @@ const biology = someSubject({ name: "Biology" });
 const history = someSubject({ name: "History" });
 export const fakeSubjects = [biology, history];
 
-const superStuds = someSquad({ name: "Super Studs", class: biology });
-const royalReaders = someSquad({ name: "Royal Readers", class: history });
+
+const superStuds = someSquad({ name: "Super Studs"});
+const royalReaders = someSquad({ name: "Royal Readers" });
 export const fakeSquads = [superStuds, royalReaders];
 
 export const fakeUsers = [

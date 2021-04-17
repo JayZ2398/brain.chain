@@ -2,6 +2,7 @@ import * as type from "./index";
 import { withId } from "../db/db";
 
 const defaultUser: type.User = {
+  id: "bob_dill",
   name: "Bob Dill",
   email: "bob@gmail.com",
   displayPicture: undefined,
@@ -20,42 +21,48 @@ export function someAccount(account: Partial<type.Account>) {
   return { ...defaultAccount, ...account };
 }
 
-const defaultSquadData: type.SquadData = {
+const defaultSquadData: type.Squad = {
+  id: "squad_data",
   name: "Super Studs",
+  subjectId: "Maths",
   users: [],
   tasks: [],
 };
-export function someSquadData(squadData: Partial<type.SquadData>) {
+export function someSquadData(squadData: Partial<type.Squad>) {
   return { ...defaultSquadData, ...squadData };
 }
 
-export function someSquad(squadData: Partial<type.SquadData>) {
+export function someSquad(squadData: Partial<type.Squad>) {
   return withId(someSquadData(squadData));
 }
 
-const defaultSubjectData: type.SubjectData = {
+const defaultSubjectData: type.Subject = {
+  id: "subject_id",
   name: "Math",
+  users: []
 };
-export function someSubject(subjectData: Partial<type.SubjectData>) {
+export function someSubject(subjectData: Partial<type.Subject>) {
   return withId({ ...defaultSubjectData, ...subjectData });
 }
 
-const defaultCommentData: type.CommentData = {
-  author: someUser({}),
+const defaultCommentData: type.Comment = {
+  id: "comment_id",
   text: "Is the mitochondria the powerhouse of the cell?",
   isQuestion: true,
 };
-export function someComment(commentData: Partial<type.CommentData>) {
+export function someComment(commentData: Partial<type.Comment>) {
   return withId({ ...defaultCommentData, ...commentData });
 }
 
-const defaultTaskData: type.TaskData = {
+const defaultTaskData: type.Task = {
+  id: "Task ID",
   name: "All about the human cell",
   text:
     "What is the purpose of the mitochondria?\nHow do human cells produce energy?",
   comments: [someComment({})],
   due: "Next Friday",
+  squadId: "squad_id"
 };
-export function someTask(taskData: Partial<type.TaskData>) {
+export function someTask(taskData: Partial<type.Task>) {
   return withId({ ...defaultTaskData, ...taskData });
 }

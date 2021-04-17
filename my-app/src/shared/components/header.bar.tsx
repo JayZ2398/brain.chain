@@ -15,9 +15,7 @@ import {
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      flexGrow: 1,
-    },
+    root: {},
     menuButton: {
       marginRight: theme.spacing(2),
     },

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import MuiTabs from "@material-ui/core/Tabs";
 
 export function TabPanel(props: any) {
   const { children, activeIndex, tabIndex, ...other } = props;
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: 224,
   },
   tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
+    borderLeft: `1px solid ${theme.palette.divider}`,
   },
 }));
 
@@ -35,38 +35,42 @@ type VerticalTabsProps = PropsWithChildren<{
   onActiveTabIndexChange: (x: number) => void;
   tabsTitle: ReactNode;
   tabs: ReactNode[];
-  tabPanels: ReactNode[];
+  style: any;
 }>;
 
-export default function VerticalTabs({
+const VertPanels = withStyles((theme) => ({
+  flexContainer: {
+    flexDirection: "column",
+  },
+  indicator: {
+    display: "none",
+  },
+}))(MuiTabs);
+
+export default function Tabs({
   activeTabIndex,
   onActiveTabIndexChange,
   tabs,
-  tabPanels,
   tabsTitle,
+  ...rest
 }: VerticalTabsProps) {
   const classes = useStyles();
 
   return (
-    // <div className={classes.root}>
-    <>
-      <div>
-        {tabsTitle}
-        <Tabs
-          orientation="vertical"
-          variant="scrollable"
-          value={activeTabIndex}
-          onChange={(ev, v) => {
-            onActiveTabIndexChange(v);
-          }}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
-          {tabs}
-        </Tabs>
-      </div>
-
-      <div>{tabPanels}</div>
-    </>
+    <div {...rest}>
+      {tabsTitle}
+      <VertPanels
+        orientation="vertical"
+        variant="scrollable"
+        value={activeTabIndex}
+        onChange={(ev, v) => {
+          onActiveTabIndexChange(v);
+        }}
+        aria-label="Vertical tabs example"
+        className={classes.tabs}
+      >
+        {tabs}
+      </VertPanels>
+    </div>
   );
 }

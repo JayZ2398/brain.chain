@@ -41,6 +41,7 @@ export default class Database {
   // Sanity check, drop whatever you want here
   async dbTest() {
     const userData: type.User = {
+      id: "Bob_id",
       name: "Bob",
       email: "bob@gmail.com",
       subjects: [],
@@ -139,7 +140,7 @@ export default class Database {
   }
 
   // create comment
-  async createComment(commentData: type.CommentData, task: type.Task) {
+  async createComment(commentData: type.Comment, task: type.Task) {
     const newComment = someComment(commentData);
     task.comments.push(newComment);
   }
