@@ -1,9 +1,11 @@
-import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginView from "./pages/login/LoginView.tsx";
 import "./App.css";
-import UserProvider from "./shared/contexts/UserProvider";
-import { Database } from "./shared/db/db";
+import UserProvider from "./shared/contexts/UserContext";
+import DatabaseContext, {
+  DatabaseContextProvider,
+} from "./shared/contexts/DatabaseContext";
+import Database from "./shared/db/db";
 
 function About() {
   return (
@@ -34,11 +36,9 @@ function Home() {
   );
 }
 
-const DatabaseContext = React.createContext(new Database());
-
 function App() {
   return (
-    <DatabaseContext.Provider>
+    <DatabaseContextProvider>
       <UserProvider>
         <Router>
           <div>
@@ -58,7 +58,7 @@ function App() {
           </div>
         </Router>
       </UserProvider>
-    </DatabaseContext.Provider>
+    </DatabaseContextProvider>
   );
 }
 

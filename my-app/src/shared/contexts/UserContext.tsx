@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-const USER_DATA_KEY = 'userData';
+const USER_DATA_KEY = "userData";
 
 type IUser = {
-  displayName: string;
+  name: string;
   email: string;
 };
 
 type IUserContext = {
-  user : IUser,
-  isAuthenticated: boolean
-}
+  user: IUser;
+  isAuthenticated: boolean;
+};
 
 export const defaultUserContext: IUserContext = {
   user: {
-    displayName: '',
-    email: '',
+    name: "",
+    email: "",
   },
   isAuthenticated: false,
 };
@@ -48,16 +48,12 @@ export function retrieveUserData(): IUserContext | null {
 }
 
 // Wrap components in this (rather than <UserContext.Provider>)
-const UserContextProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
   // Retrieve stored user data
   const localData = retrieveUserData();
 
   const [state, setState] = useState<IUserContext>(
-    localData || defaultUserContext,
+    localData || defaultUserContext
   );
 
   /**
@@ -71,8 +67,8 @@ const UserContextProvider = ({
   };
 
   /**
- * Reset context state to defaultUserContext, and clear browser stored user data.
- */
+   * Reset context state to defaultUserContext, and clear browser stored user data.
+   */
   const resetState = () => {
     setState(defaultUserContext);
     localStorage.clear();

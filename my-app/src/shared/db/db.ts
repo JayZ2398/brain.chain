@@ -1,33 +1,36 @@
 import { v4 as uuid } from "uuid";
-import * as types from "../models/index";
+import * as type from "../models/index";
+import { fakeUsers, fakeAccounts } from "./initialFakeData";
 
 function withId<T>(object: T): T & { id: string } {
   return { id: uuid(), ...object };
 }
 
-export class Database {
-  users: Map<string, types.User>;
-  accounts: Map<string, types.Account>;
+export default class Database {
+  users: Map<string, type.User>;
+  accounts: Map<string, type.Account>;
 
   constructor() {
     this.users = new Map();
+    fakeUsers.forEach((user) => this.createUser(user));
+
     this.accounts = new Map();
-    this.dbTest();
+    fakeAccounts.forEach((account) => this.createAccount(account));
   }
 
   // Sanity check, drop whatever you want here
   async dbTest() {
-    const userData: types.UserData = {
-      name: "Jack",
-      email: "jack@gmail.com",
+    const userData: type.User = {
+      name: "Bob",
+      email: "bob@gmail.com",
       subjects: [],
       squads: [],
     };
     let user = await this.createUser(userData);
-    console.log("Got user: ", this.getUser(user.id));
+    console.log("Got user: ", this.getUser(user.email));
     const newUserData = { ...userData, name: "Jonah" };
 
-    user = await this.updateUser(user.id, newUserData);
+    user = await this.updateUser(user.email, newUserData);
     console.log("Updated user: ", user);
 
     // account
@@ -38,36 +41,39 @@ export class Database {
     await this.createAccount(accountData);
   }
 
-  async createUser(userData: types.UserData) {
+  async createUser(userData: type.User) {
     const users = Array.from(this.users.values());
     // There is no existing user
     if (!users.map((user) => user.email).includes(userData.email)) {
-      const user: types.User = withId(userData);
-      this.users.set(user.id, user);
-      console.log("Created user: ", user);
-      return user;
+      this.users.set(userData.email, userData);
+      console.log("Created user: ", userData);
+      return userData;
     }
     throw Error();
   }
 
-  async getUser(id: string) {
-    const res = this.users.get(id);
+  async getUser(email: string) {
+    const res = this.users.get(email);
     if (res) return res;
     throw Error("Not found");
   }
 
-  async updateUser(id: string, userData: types.UserData) {
-    const user = await this.getUser(id);
-    if (user) {
-      const newUser: types.User = { ...userData, id };
-      this.users.set(id, newUser);
+  async getAllUsers() {
+    return Array.from(this.users.values());
+  }
+
+  async updateUser(existingEmail: string, user: type.User) {
+    const existingUser = await this.getUser(existingEmail);
+    if (existingUser) {
+      this.users.delete(existingEmail);
+      const newUser = await this.createUser(user);
       return newUser;
     }
     throw Error();
   }
 
-  async createAccount(accountData: types.Account) {
-    const accountEmails = Array.from(this.users.keys());
+  async createAccount(accountData: type.Account) {
+    const accountEmails = Array.from(this.accounts.keys());
     // There is no existing user
     if (!accountEmails.includes(accountData.email)) {
       this.accounts.set(accountData.email, accountData);

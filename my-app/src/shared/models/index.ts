@@ -1,12 +1,12 @@
-export type WithId<TObj = {}, TId = string> = TObj & { id: TId };
+export type type<TObj = {}, TId = string> = TObj & { id: TId };
 
-export type Subject = WithId & SubjectData;
+export type Subject = type & SubjectData;
 export type SubjectData = {
   name: string;
   users: User[];
 };
 
-export type Squad = WithId & SquadData;
+export type Squad = type & SquadData;
 export type SquadData = {
   name: string;
   displayPicture?: string;
@@ -22,8 +22,7 @@ export type Account = {
   password: string;
 };
 
-export type User = WithId & UserData;
-export type UserData = {
+export type User = {
   name: string;
   email: string;
   displayPicture?: string;
@@ -32,7 +31,7 @@ export type UserData = {
   squads: Squad[];
 };
 
-export type Task = WithId & TaskData;
+export type Task = type & TaskData;
 export type TaskData = {
   name: string;
   text: string;
@@ -43,7 +42,7 @@ export type TaskData = {
   due?: string;
 };
 
-export type Comment = WithId & CommentData;
+export type Comment = type & CommentData;
 export type CommentData = {
   author: User;
   text: string;
