@@ -1,14 +1,9 @@
-import React, { PropsWithChildren, ReactNode } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
+import React, { PropsWithChildren, ReactNode } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Tabs from "@material-ui/core/Tabs";
 
 export function TabPanel(props: any) {
-  const {
-    children,
-    activeIndex,
-    tabIndex,
-    ...other
-  } = props;
+  const { children, activeIndex, tabIndex, ...other } = props;
 
   return (
     <div
@@ -18,9 +13,7 @@ export function TabPanel(props: any) {
       aria-labelledby={`vertical-tab-${tabIndex}`}
       {...other}
     >
-      {activeIndex === tabIndex && (
-        children
-      )}
+      {activeIndex === tabIndex && children}
     </div>
   );
 }
@@ -29,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-    display: 'flex',
+    display: "flex",
     height: 224,
   },
   tabs: {
@@ -38,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type VerticalTabsProps = PropsWithChildren<{
-    activeTabIndex: number,
-    onActiveTabIndexChange: (x: number) => void,
-    tabsTitle: ReactNode,
-    tabs: ReactNode[],
-    tabPanels: ReactNode[]
-}>
+  activeTabIndex: number;
+  onActiveTabIndexChange: (x: number) => void;
+  tabsTitle: ReactNode;
+  tabs: ReactNode[];
+  tabPanels: ReactNode[];
+}>;
 
 export default function VerticalTabs({
   activeTabIndex,
@@ -55,14 +48,17 @@ export default function VerticalTabs({
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    // <div className={classes.root}>
+    <>
       <div>
-        { tabsTitle }
+        {tabsTitle}
         <Tabs
           orientation="vertical"
           variant="scrollable"
           value={activeTabIndex}
-          onChange={(ev, v) => { onActiveTabIndexChange(v); }}
+          onChange={(ev, v) => {
+            onActiveTabIndexChange(v);
+          }}
           aria-label="Vertical tabs example"
           className={classes.tabs}
         >
@@ -70,7 +66,7 @@ export default function VerticalTabs({
         </Tabs>
       </div>
 
-      { tabPanels }
-    </div>
+      <div>{tabPanels}</div>
+    </>
   );
 }

@@ -34,7 +34,9 @@ function App() {
     <Router>
       <ThemeProvider theme={GlobalTheme}>
 
-        <div>
+        <div
+          style={{ width: '100%', height: '100%' }}
+        >
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>

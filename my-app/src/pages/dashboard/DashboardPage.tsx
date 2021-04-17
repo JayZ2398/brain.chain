@@ -1,54 +1,34 @@
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Box from '@material-ui/core/Box';
-import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
+import Card from "@material-ui/core/Card";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 
-import { Subject } from '../../shared/models'
+import { Subject } from "../../shared/models";
+import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
 
-export const subjects: (Subject & { due: string, taskName: string })[] = [
+export const subjects: (Subject & { due: string; taskName: string })[] = [
   {
-    id: 'subject-1',
+    id: "subject-1",
     users: [],
-    name: 'Science',
-    due: '19th Jan',
-    taskName: 'Plants and nature task',
+    name: "Science",
+    due: "19th Jan",
+    taskName: "Plants and nature task",
   },
   {
-    id: 'subject-2',
+    id: "subject-2",
     users: [],
-    name: 'Mathematics',
-    due: '26th Jan',
-    taskName: 'Pythagoras task',
+    name: "Mathematics",
+    due: "26th Jan",
+    taskName: "Pythagoras task",
   },
   {
-    id: 'subject-3',
+    id: "subject-3",
     users: [],
-    name: 'English',
-    due: '12th Jan',
-    taskName: 'Shakespear task',
+    name: "English",
+    due: "12th Jan",
+    taskName: "Shakespear task",
   },
 ];
-
-function LinearProgressWithLabel(
-  props: LinearProgressProps & { value: number },
-) {
-  return (
-    <Box display="flex" alignItems="center">
-      <Box width="100%" mr={1}>
-        <LinearProgress variant="determinate" {...props} />
-      </Box>
-      <Box minWidth={35}>
-        <Typography variant="body2" color="textSecondary">
-          {`${Math.round(
-            props.value,
-          )}%`}
-        </Typography>
-      </Box>
-    </Box>
-  );
-}
 
 export default function DashboardPage() {
   return (
@@ -58,15 +38,9 @@ export default function DashboardPage() {
           {subjects.map((subject: any) => (
             <Grid item xs={6}>
               <Card>
-                <Typography variant="h3">
-                  {subject.name}
-                </Typography>
-                <Typography>
-                  {subject.due}
-                </Typography>
-                <Typography>
-                  {subject.taskName}
-                </Typography>
+                <Typography variant="h3">{subject.name}</Typography>
+                <Typography>{subject.due}</Typography>
+                <Typography>{subject.taskName}</Typography>
               </Card>
             </Grid>
           ))}

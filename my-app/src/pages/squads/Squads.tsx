@@ -1,22 +1,30 @@
-import React, { PropsWithChildren, useState } from 'react';
-import { Box } from '@material-ui/core';
-import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
+import React, { PropsWithChildren, useState } from "react";
+import { Box } from "@material-ui/core";
+import styled from "styled-components";
 
-import SubjectSelect from '../../pages/subjects/ui/SubjectSelect';
-import Squad from './ui/Squad';
-import { Squad as SquadModel } from '../../shared/models';
+import SubjectSelect from "../../pages/subjects/ui/SubjectSelect";
+import Squad from "./ui/Squad";
+import { Squad as SquadModel } from "../../shared/models";
+import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
 
-type SquadsProps = PropsWithChildren<{
-}>
+const Outerlayout = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: min-content 1fr;
+  grid-gap: 32px 16px;
+`;
+
+type SquadsProps = PropsWithChildren<{}>;
 
 const squads: SquadModel[] = [
   {
-    id: 'squad-1',
-    name: 'BioBrains',
+    id: "squad-1",
+    name: "BioBrains",
     users: [
       {
-        id: 'user-1',
-        name: 'John',
+        id: "user-1",
+        name: "John",
         subjects: [],
         squads: [],
         comments: [],
@@ -24,16 +32,16 @@ const squads: SquadModel[] = [
     ],
     tasks: [
       {
-        id: 'task-1',
-        name: 'What is photosynthesis',
-        text: 'Last week we explored plant biology, what does this word mean?',
+        id: "task-1",
+        name: "What is photosynthesis",
+        text: "Last week we explored plant biology, what does this word mean?",
 
         comments: [],
       },
       {
-        id: 'task-2',
-        name: 'What does pythag\'s theorem mean?',
-        text: 'Last week we explored plant biology, what does this word mean?',
+        id: "task-2",
+        name: "What does pythag's theorem mean?",
+        text: "Last week we explored plant biology, what does this word mean?",
 
         comments: [],
       },
@@ -43,8 +51,9 @@ const squads: SquadModel[] = [
 const defaultActiveSquad = squads[0].id;
 
 function Squads({ children, ...rest }: SquadsProps) {
-  const [activeSquadId, setActiveSquadId]
-    = useState<string | undefined>(defaultActiveSquad);
+  const [activeSquadId, setActiveSquadId] = useState<string | undefined>(
+    defaultActiveSquad
+  );
 
   let activeSquad: SquadModel | undefined;
   if (activeSquadId) {
@@ -52,29 +61,19 @@ function Squads({ children, ...rest }: SquadsProps) {
     if (s) activeSquad = s;
     else {
       throw new Error(
-        `Dev error - could not find a squad with id '${activeSquadId}'`,
+        `Dev error - could not find a squad with id '${activeSquadId}'`
       );
     }
   }
 
   return (
-    <div
-      {...rest}
-    >
-      <Box
-        padding={2}
-      >
-        <SubjectSelect />
+    <Outerlayout>
+      <SubjectSelect />
 
-        <Box width="100%" mr={1}>
-            <LinearProgress variant="determinate" />
-        </Box>
-      </Box>
-      <Squad
-        squad={activeSquad}
-        squadLoading={false}
-      />
-    </div>
+      <LinearProgressWithLabel value={80} />
+
+      <Squad squad={activeSquad} squadLoading={false} />
+    </Outerlayout>
   );
 }
 
