@@ -12,11 +12,16 @@ import { DateArg, formatDateDisplay } from "../../../shared/datetime/funcs";
 interface SubjectCardProps {
   subject: Subject;
   highlightedTask?: Task;
+  onClick: () => void;
 }
 
-export function SubjectCard({ subject, highlightedTask }: SubjectCardProps) {
+export function SubjectCard({
+  subject,
+  highlightedTask,
+  ...rest
+}: SubjectCardProps) {
   return (
-    <Card variant="outlined">
+    <Card variant="outlined" {...rest}>
       <CardActionArea>
         <CardContent>
           <Typography variant="h5" component="h2">

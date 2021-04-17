@@ -1,12 +1,14 @@
 import React, { PropsWithChildren, useState } from "react";
 import { Box } from "@material-ui/core";
 import styled from "styled-components";
+import { useDispatch, useEquivSelector } from "../../shared/redux/hooks";
 
 import SubjectSelect from "../../pages/subjects/ui/SubjectSelect";
 import Squad from "./ui/Squad";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
 import { squads } from "../../shared/data";
 import { Squad as SquadModel } from "../../shared/models";
+import { actions, selectActiveSquad } from "../../pages/squads/slice";
 
 const Outerlayout = styled.div`
   height: 100%;
@@ -21,9 +23,10 @@ type SquadsProps = PropsWithChildren<{}>;
 const defaultActiveSquad = squads[0].id;
 
 function Squads({ children, ...rest }: SquadsProps) {
-  const [activeSquadId, setActiveSquadId] = useState<string | undefined>(
-    defaultActiveSquad
-  );
+  const activeSquadId = useEquivSelector(selectActiveSquad);
+  const dispatch = useDispatch();
+  const setActiveSquadId = (x: string | undefined) =>
+    dispatch(actions.setActiveSquadId(x));
 
   let activeSquad: SquadModel | undefined;
   if (activeSquadId) {

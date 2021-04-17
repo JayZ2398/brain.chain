@@ -2,6 +2,7 @@ import react from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import { useDispatch } from "../../shared/redux/hooks";
 
 import { Subject, Squad } from "../../shared/models";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
@@ -9,8 +10,16 @@ import { subjects, tasks, squads } from "../../shared/data";
 import SubjectCard from "../../pages/subjects/ui/SubjectCard";
 import { getPriorityTask } from "../tasks/funcs";
 import { RequireField } from "../../shared/types";
+import { actions } from "../../pages/squads/slice";
+
+type SquadWithSubject = RequireField<Squad, "subject">;
 
 export default function DashboardPage() {
+  const dispatch = useDispatch();
+  function handleSubjectClicked(squad: SquadWithSubject) {
+    dispatch(actions.setActiveSquadId(squad.id));
+  }
+
   // TODO: why type no worky?
   // const squadsWithSubjects: RequireField<Squad, 'subject'> = squads.map((s) => ({
   const squadsWithSubjects: any = squads.map((s) => ({
@@ -26,9 +35,10 @@ export default function DashboardPage() {
           <Typography variant="h3">Subjects</Typography>
         </Grid>
         <Grid item container spacing={3}>
-          {squadsWithSubjects.map((squad: RequireField<Squad, "subject">) => (
+          {squadsWithSubjects.map((squad: SquadWithSubject) => (
             <Grid item xs={6}>
               <SubjectCard
+                onClick={() => handleSubjectClicked(squad)}
                 subject={squad.subject}
                 highlightedTask={getPriorityTask(
                   tasks.filter((t) => t.squadId === squad.id)
