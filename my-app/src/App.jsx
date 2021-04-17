@@ -45,6 +45,7 @@ function App() {
               <LoginView />
             </Route>
             <Route path="/squads">
+              <ButtonAppBar />
               <Squads />
             </Route>
             <Route path="/">
