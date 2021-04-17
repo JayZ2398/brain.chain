@@ -12,23 +12,6 @@ import DashboardPage from './pages/dashboard/DashboardPage.tsx';
 import LoginView from './pages/login/LoginView';
 import Squads from './pages/squads/Squads';
 
-function About() {
-  return (
-    <>
-      <h1>About</h1>
-      <p>About our product.</p>
-    </>
-  );
-}
-
-function Home() {
-  return (
-    <>
-      <DashboardPage />
-    </>
-  );
-}
-
 function App() {
   return (
     <Router>
@@ -52,7 +35,7 @@ function App() {
             </Route>
             <Route path="/">
               <ButtonAppBar />
-              <Home />
+              <DashboardPage />
             </Route>
           </Switch>
         </div>
