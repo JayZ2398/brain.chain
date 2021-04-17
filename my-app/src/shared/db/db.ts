@@ -120,7 +120,7 @@ export default class Database {
   // User->Squads
   async addToSquad(user: type.User, squad: type.Squad) {
     try {
-      if (!squad.users.includes(user)) squad.users.push(user);
+      if (!squad.users.includes(user.id)) squad.users.push(user.id);
       if (!user.squads.includes(squad)) user.squads.push(squad);
     } catch (error) {
       throw error;

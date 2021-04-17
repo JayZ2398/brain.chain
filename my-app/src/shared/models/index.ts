@@ -9,7 +9,7 @@ export type Squad = WithId & {
   name: string;
   displayPicture?: string;
 
-  users: User[];
+  users: String[];
   subjectId: string;
   subject?: Subject;
   tasks: Task[];
@@ -24,9 +24,8 @@ export type User = WithId & {
   name: string;
   displayPicture?: string;
   email: string;
-
-  subjects?: Subject[];
   subjectIds?: string[];
+  subjects?: Subject[];
   squadIds?: string[];
   squads: Squad[];
   commentIds?: string[];

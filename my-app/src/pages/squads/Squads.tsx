@@ -29,7 +29,8 @@ function Squads({ children, ...rest }: SquadsProps) {
   const usersSubjects = subjects;
   const usersSquads = squads;
 
-  const activeSquadId = useEquivSelector(selectActiveSquad);
+  // const activeSquadId = useEquivSelector(selectActiveSquad);
+  const activeSquadId = "squad-1"
   const dispatch = useDispatch();
   const setActiveSquadId = (x: string | undefined) =>
     dispatch(actions.setActiveSquadId(x));

@@ -9,7 +9,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
-import { Squad } from "../../../shared/models";
+import { Squad, User } from "../../../shared/models";
+import { users } from "../../../shared/data";
 
 const CardLayout = styled.div`
   display: grid;
@@ -42,24 +43,35 @@ function MeetSquad({ squad, squadLoading, ...rest }: MeetSquadProps) {
 
       <Grid item>
         <CardLayout>
-          {squad.users.map((u) => (
+          {squad.users.map((u) => {
+            // const user = users.map((user) => user.id === u)[0]
+            // console.log(user)
+            // // const user  = users.find(u)
+            // console.log(u)
+            // console.log(users)
+            const user = users.find(x => x.id === u)
+            if(user){
+
+            return (
             <Card variant="outlined">
               <CardActionArea>
                 <CardMedia
                   component="img"
-                  alt={`${u.name}'s profile picture`}
+                  alt={`${user.name}'s profile picture`}
                   height="140"
-                  image={u.displayPicture}
-                  title={u.name}
+                  image={user.displayPicture}
+                  title={user.name}
                 />
                 <CardContent>
                   <Typography variant="h5" component="h2">
-                    {u.name}
+                    {user.name}
                   </Typography>
                 </CardContent>
               </CardActionArea>
             </Card>
-          ))}
+          )} else {
+            return <> </>
+          }})}
         </CardLayout>
       </Grid>
     </Grid>

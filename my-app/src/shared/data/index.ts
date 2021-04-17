@@ -33,51 +33,59 @@ export const subjects: Subject[] = [
   },
 ];
 
+export const users: User[] = [
+  {
+    id: "user-1",
+    email: "user-1@gmail.com",
+    displayPicture:
+      "https://images.unsplash.com/photo-1524503033411-c9566986fc8f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
+    name: "John",
+    subjectIds: ["subject-1", "subject-2", "subject-3"],
+    subjects: [],
+    commentIds: [],
+    comments: [],
+    squadIds: [],
+    squads: [],
+  },
+  {
+    id: "user-2",
+    email: "user-2@gmail.com",
+    displayPicture:
+      "https://images.unsplash.com/photo-1491013516836-7db643ee125a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2125&q=80",
+    name: "Alan",
+    subjectIds: ["subject-1", "subject-2", "subject-3"],
+    subjects: [],
+    commentIds: [],
+    comments: [],
+    squadIds: [],
+    squads: [],
+  },
+  {
+    id: "user-3",
+    email: "user-3@gmail.com",
+    displayPicture:
+      "https://images.unsplash.com/photo-1534982841079-afde227ada8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2550&q=80",
+    name: "Naomi",
+    subjectIds: ["subject-1", "subject-2", "subject-3"],
+    subjects: [],
+    commentIds: [],
+    comments: [],
+    squadIds: [],
+    squads: [],
+  },
+]
+
+
+
 export const squads: SquadModel[] = [
   {
     id: "squad-1",
     name: "BioBrains",
     subjectId: "subject-1",
     users: [
-      {
-        id: "user-1",
-        email: "user-1@gmail.com",
-        displayPicture:
-          "https://images.unsplash.com/photo-1524503033411-c9566986fc8f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
-        name: "John",
-        subjectIds: ["subject-1", "subject-2", "subject-3"],
-        subjects: [],
-        commentIds: [],
-        comments: [],
-        squadIds: [],
-        squads: [],
-      },
-      {
-        id: "user-2",
-        email: "user-2@gmail.com",
-        displayPicture:
-          "https://images.unsplash.com/photo-1491013516836-7db643ee125a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2125&q=80",
-        name: "Alan",
-        subjectIds: ["subject-1", "subject-2", "subject-3"],
-        subjects: [],
-        commentIds: [],
-        comments: [],
-        squadIds: [],
-        squads: [],
-      },
-      {
-        id: "user-3",
-        email: "user-3@gmail.com",
-        displayPicture:
-          "https://images.unsplash.com/photo-1534982841079-afde227ada8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2550&q=80",
-        name: "Naomi",
-        subjectIds: ["subject-1", "subject-2", "subject-3"],
-        subjects: [],
-        commentIds: [],
-        comments: [],
-        squadIds: [],
-        squads: [],
-      },
+      "user-1",
+      "user-2",
+      "user-3",
     ],
     tasks: [
       {

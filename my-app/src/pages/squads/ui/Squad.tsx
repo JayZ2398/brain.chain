@@ -12,13 +12,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import MeetSquad from "./MeetSquad";
 import EmptyDisplay from "../../../shared/components/EmptyDisplay";
 import UndrawChildren from "../../../shared/components/arty/UndrawChildren";
+import styled from "styled-components";
 
 type SquadProps = PropsWithChildren<{
   squad?: SquadModel;
   squadLoading: boolean;
 }>;
 
-import styled from "styled-components";
 
 const TasksTitle = styled.div`
   text-transform: uppercase;
