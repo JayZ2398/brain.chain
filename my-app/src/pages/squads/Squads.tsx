@@ -1,10 +1,19 @@
 import React, { PropsWithChildren, useState } from "react";
+import { Box } from "@material-ui/core";
+import styled from "styled-components";
 
 import SubjectSelect from "../../pages/subjects/ui/SubjectSelect";
 import Squad from "./ui/Squad";
 import { Squad as SquadModel } from "../../shared/models";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
-import Container from "@material-ui/core/Container";
+
+const Outerlayout = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: min-content 1fr;
+  grid-gap: 32px 16px;
+`;
 
 type SquadsProps = PropsWithChildren<{}>;
 
@@ -58,14 +67,13 @@ function Squads({ children, ...rest }: SquadsProps) {
   }
 
   return (
-    <>
+    <Outerlayout>
       <SubjectSelect />
-      <Squad squad={activeSquad} squadLoading={false} />
-      <Container maxWidth="xl">
-        <LinearProgressWithLabel value={80} />
 
-      </Container>
-    </>
+      <LinearProgressWithLabel value={80} />
+
+      <Squad squad={activeSquad} squadLoading={false} />
+    </Outerlayout>
   );
 }
 
