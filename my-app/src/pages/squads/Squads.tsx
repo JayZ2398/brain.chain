@@ -6,9 +6,10 @@ import { useDispatch, useEquivSelector } from "../../shared/redux/hooks";
 import SubjectSelect from "../../pages/subjects/ui/SubjectSelect";
 import Squad from "./ui/Squad";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
-import { squads } from "../../shared/data";
+import { squads, subjects } from "../../shared/data";
 import { Squad as SquadModel } from "../../shared/models";
 import { actions, selectActiveSquad } from "../../pages/squads/slice";
+import { unwrapValueThen } from "../../shared/js";
 
 const Outerlayout = styled.div`
   height: 100%;
@@ -20,9 +21,10 @@ const Outerlayout = styled.div`
 
 type SquadsProps = PropsWithChildren<{}>;
 
-const defaultActiveSquad = squads[0].id;
-
 function Squads({ children, ...rest }: SquadsProps) {
+  const usersSubjects = subjects;
+  const usersSquads = squads;
+
   const activeSquadId = useEquivSelector(selectActiveSquad);
   const dispatch = useDispatch();
   const setActiveSquadId = (x: string | undefined) =>
@@ -30,7 +32,7 @@ function Squads({ children, ...rest }: SquadsProps) {
 
   let activeSquad: SquadModel | undefined;
   if (activeSquadId) {
-    const s = squads.find((x) => x.id === activeSquadId);
+    const s = usersSquads.find((x) => x.id === activeSquadId);
     if (s) activeSquad = s;
     else {
       throw new Error(
@@ -39,9 +41,24 @@ function Squads({ children, ...rest }: SquadsProps) {
     }
   }
 
+  const d = usersSubjects.find((s) => s.id === activeSquad?.subjectId);
+  console.log("d", d);
+
   return (
     <Outerlayout>
-      <SubjectSelect />
+      <SubjectSelect
+        value={usersSubjects.find((s) => s.id === activeSquad?.subjectId)?.id}
+        // onChange={(x) => {
+        //   console.log("onChange", x);
+        // }}
+        onChange={unwrapValueThen((subjId) => {
+          const userSquadForSubject = usersSquads.find(
+            (s) => s.subjectId === subjId
+          )?.id;
+          console.log("userSquadForSubject", userSquadForSubject);
+          setActiveSquadId(userSquadForSubject);
+        })}
+      />
 
       <LinearProgressWithLabel value={80} />
 

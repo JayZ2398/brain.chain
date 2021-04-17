@@ -18,13 +18,6 @@ type SquadProps = PropsWithChildren<{
 
 import styled from "styled-components";
 
-const useTabStyles = makeStyles((theme) => ({
-  wrapper: {
-    textTransform: "none",
-    alignItems: "start",
-  },
-}));
-
 const TasksTitle = styled.div`
   text-transform: uppercase;
   margin-bottom: 16px;
@@ -38,8 +31,6 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
   const [activeTaskIndex, setActiveTaskIndex] = useState<number>(0);
 
   if (!squad || squadLoading) return <div>loading</div>;
-
-  const tabStyles = useTabStyles();
 
   return (
     <>
@@ -56,7 +47,6 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
         onActiveTabIndexChange={setActiveTaskIndex}
         tabsTitle={<TasksTitle>Squad Tasks</TasksTitle>}
         tabs={squad.tasks.map((t) => (
-          //   <Tab classes={tabStyles} label={getTaskDisplayName(t)} id={t.id} />
           <Tab label={getTaskDisplayName(t)} id={t.id} />
         ))}
         tabPanels={squad.tasks.map((t, i) => (

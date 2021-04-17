@@ -3,6 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { useDispatch } from "../../shared/redux/hooks";
+import { useHistory } from "react-router-dom";
 
 import { Subject, Squad } from "../../shared/models";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
@@ -15,9 +16,11 @@ import { actions } from "../../pages/squads/slice";
 type SquadWithSubject = RequireField<Squad, "subject">;
 
 export default function DashboardPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   function handleSubjectClicked(squad: SquadWithSubject) {
     dispatch(actions.setActiveSquadId(squad.id));
+    history.replace("/squads");
   }
 
   // TODO: why type no worky?
