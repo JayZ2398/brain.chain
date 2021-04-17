@@ -3,11 +3,14 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import LoginView from './pages/login/LoginView.tsx';
-import Squads from './pages/squads/Squads';
 
+import { ThemeProvider } from '@material-ui/core/styles';
 import './App.css';
-import UserProvider from './shared/contexts/UserProvider';
+import ButtonAppBar from './shared/components/header.bar.tsx';
+import GlobalTheme from './shared/styles/global.theme.tsx';
+import DashboardPage from './pages/dashboard/DashboardPage.tsx';
+import LoginView from './pages/login/LoginView';
+import Squads from './pages/squads/Squads';
 
 function About() {
   return (
@@ -20,32 +23,17 @@ function About() {
 
 function Home() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <DashboardPage />
+    </>
   );
 }
 
 function App() {
   return (
-    <UserProvider>
-      <Router>
+    <Router>
+      <ThemeProvider theme={GlobalTheme}>
+
         <div>
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -60,12 +48,13 @@ function App() {
               <Squads />
             </Route>
             <Route path="/">
+              <ButtonAppBar />
               <Home />
             </Route>
           </Switch>
         </div>
-      </Router>
-    </UserProvider>
+      </ThemeProvider>
+    </Router>
   );
 }
 
