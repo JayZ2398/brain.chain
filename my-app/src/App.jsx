@@ -4,6 +4,8 @@ import {
   Route,
 } from 'react-router-dom';
 import LoginView from './pages/login/LoginView.tsx';
+import Squads from './pages/squads/Squads';
+
 import './App.css';
 import UserProvider from './shared/contexts/UserProvider';
 
@@ -53,6 +55,9 @@ function App() {
             </Route>
             <Route path="/login">
               <LoginView />
+            </Route>
+            <Route path="/squads">
+              <Squads />
             </Route>
             <Route path="/">
               <Home />
