@@ -1,52 +1,70 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": ["plugin:react/recommended", "airbnb"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+    "env": {
+        "browser": true,
+        "es2021": true
     },
-    "ecmaVersion": 12,
-    "sourceType": "module"
-  },
-  "plugins": ["react", "@typescript-eslint", "unused-imports"],
-  "rules": {
-    "@typescript-eslint/no-use-before-define": ["error"],
-    "import/no-unresolved": "off",
-    "import/extensions": "off",
-    "max-len": [
-      "error",
-      {
-        "ignoreStrings": true,
-        "ignoreComments": true,
-        "ignoreTrailingComments": true
-      }
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
     ],
-    "no-shadow": "off",
-    "no-unused-vars": "off",
-    // note you must disable the base rule as it can report incorrect errors
-    "no-use-before-define": "off",
-    "unused-imports/no-unused-imports": "error",
-    "unused-imports/no-unused-vars": [
-      "warn",
-      {
-        "vars": "all",
-        "varsIgnorePattern": "^_",
-        "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "unused-imports"
     ],
-    "react/jsx-filename-extension": [
-      2,
-      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ],
-    "react/destructuring-assignment": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/no-unescaped-entities": 0,
-    "react/prop-types": "off",
-    "react/react-in-jsx-scope": "off"
-  }
+    "rules": {
+        "@typescript-eslint/no-use-before-define": [
+            "error"
+        ],
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
+        "max-len": [
+            "error",
+            {
+                "ignoreStrings": true,
+                "ignoreComments": true,
+                "ignoreTrailingComments": true
+            }
+        ],
+        "no-shadow": "off",
+        "no-unused-vars": "off",
+        // note you must disable the base rule as it can report incorrect errors
+        "no-use-before-define": "off",
+        "operator-linebreak": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "varsIgnorePattern": "^_",
+                "args": "after-used",
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "react/jsx-filename-extension": [
+            2,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        ],
+        "react/destructuring-assignment": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/no-unescaped-entities": 0,
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off"
+    }
 }
