@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from "react";
+import React, { PropsWithChildren, useState, Fragment } from "react";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 
@@ -9,6 +9,7 @@ import VerticalTabs, {
 import Task from "../../tasks/ui/Task";
 import { getTaskDisplayName } from "../../tasks/funcs";
 import { makeStyles } from "@material-ui/core/styles";
+import MeetSquad from "./MeetSquad";
 
 type SquadProps = PropsWithChildren<{
   squad?: SquadModel;
@@ -41,19 +42,29 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
   const tabStyles = useTabStyles();
 
   return (
-    <VerticalTabs
-      activeTabIndex={activeTaskIndex}
-      onActiveTabIndexChange={setActiveTaskIndex}
-      tabsTitle={<TasksTitle>Squad Tasks</TasksTitle>}
-      tabs={squad.tasks.map((t) => (
-        <Tab classes={tabStyles} label={getTaskDisplayName(t)} id={t.id} />
-      ))}
-      tabPanels={squad.tasks.map((t, i) => (
-        <TabPanel activeIndex={activeTaskIndex} tabIndex={i}>
-          <Task taskLoading={squadLoading} task={t} />
-        </TabPanel>
-      ))}
-    />
+    <>
+      <MeetSquad
+        squad={squad}
+        squadLoading={squadLoading}
+        style={{
+          gridColumnStart: 2,
+          gridColumnEnd: 3,
+        }}
+      />
+      <VerticalTabs
+        activeTabIndex={activeTaskIndex}
+        onActiveTabIndexChange={setActiveTaskIndex}
+        tabsTitle={<TasksTitle>Squad Tasks</TasksTitle>}
+        tabs={squad.tasks.map((t) => (
+          <Tab classes={tabStyles} label={getTaskDisplayName(t)} id={t.id} />
+        ))}
+        tabPanels={squad.tasks.map((t, i) => (
+          <TabPanel activeIndex={activeTaskIndex} tabIndex={i}>
+            <Task taskLoading={squadLoading} task={t} />
+          </TabPanel>
+        ))}
+      />
+    </>
   );
 }
 
