@@ -1,5 +1,6 @@
 // Taken from https://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-in/SignIn.js
-import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import useUser from '../../shared/hooks/useUser';
 import { signInWithGoogle } from '../../shared/firebase/firebase';
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +40,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// Not working
+// eslint-disable-next-line unused-imports/no-unused-vars
+const GoogleSignInButton = () => {
+  const classes = useStyles();
+  return (
+    <Button
+      onClick={signInWithGoogle}
+      className={classes.submit}
+      fullWidth
+      variant="outlined"
+      color="primary"
+    >
+      <Grid container direction="row" justify="center" alignItems="center">
+        <Grid item component={Box} marginRight="auto">
+          <Grid container justify="center" alignItems="center">
+            <img src="https://img.icons8.com/dusk/64/000000/google-logo--v1.png" alt="google logo" />
+          </Grid>
+        </Grid>
+        <Box marginRight="auto">
+          <span> Continue with Google</span>
+        </Box>
+      </Grid>
+    </Button>
+  );
+};
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -54,6 +82,17 @@ function Copyright() {
 
 export default function LoginView() {
   const classes = useStyles();
+  const { user } = useUser();
+  const [redirect, setRedirect] = useState({});
+
+  useEffect(() => {
+    if (user) {
+      setRedirect('/dashboard');
+    }
+  }, [user]);
+  if (redirect) {
+    <Redirect to={redirect} />;
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -100,24 +139,6 @@ export default function LoginView() {
             className={classes.submit}
           >
             Sign In
-          </Button>
-          <Button
-            onClick={signInWithGoogle}
-            className={classes.submit}
-            fullWidth
-            variant="outlined"
-            color="primary"
-          >
-            <Grid container direction="row" justify="center" alignItems="center">
-              <Grid item component={Box} marginRight="auto">
-                <Grid container justify="center" alignItems="center">
-                  <img src="https://img.icons8.com/dusk/64/000000/google-logo--v1.png" alt="google logo" />
-                </Grid>
-              </Grid>
-              <Box marginRight="auto">
-                <span> Continue with Google</span>
-              </Box>
-            </Grid>
           </Button>
           <Grid container>
             <Grid item xs>
