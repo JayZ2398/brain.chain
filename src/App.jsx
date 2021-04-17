@@ -4,12 +4,11 @@ import {
   Route,
 } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
-import LoginView from './pages/login/LoginView.tsx';
 import './App.css';
 import ButtonAppBar from './shared/components/header.bar.tsx';
 import GlobalTheme from './shared/styles/global.theme.tsx';
 import DashboardPage from './pages/dashboard/DashboardPage.tsx';
-import UserProvider from './shared/contexts/UserProvider';
+import LoginView from './pages/login/LoginView';
 
 function About() {
   return (
@@ -30,28 +29,27 @@ function Home() {
 
 function App() {
   return (
-    <UserProvider>
+    <Router>
       <ThemeProvider theme={GlobalTheme}>
-        <Router>
-          <div>
-            {/* A <Switch> looks through its children <Route>s and
+
+        <div>
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-            <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/login">
-                <LoginView />
-              </Route>
-              <Route path="/">
-                <ButtonAppBar />
-                <Home />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/login">
+              <LoginView />
+            </Route>
+            <Route path="/">
+              <ButtonAppBar />
+              <Home />
+            </Route>
+          </Switch>
+        </div>
       </ThemeProvider>
-    </UserProvider>
+    </Router>
   );
 }
 
