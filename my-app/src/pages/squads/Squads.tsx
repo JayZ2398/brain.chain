@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, useState } from 'react';
+import { Box } from '@material-ui/core';
 
 import SubjectSelect from '../../pages/subjects/ui/SubjectSelect';
 import Squad from './ui/Squad';
@@ -59,7 +60,11 @@ function Squads({ children, ...rest }: SquadsProps) {
     <div
       {...rest}
     >
-      <SubjectSelect />
+      <Box
+        padding={2}
+      >
+        <SubjectSelect />
+      </Box>
       <Squad
         squad={activeSquad}
         squadLoading={false}

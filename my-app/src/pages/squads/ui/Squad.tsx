@@ -1,5 +1,6 @@
-import React, { PropsWithChildren, useState, useEffect } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
 
 import { Squad as SquadModel } from '../../../shared/models';
 import VerticalTabs, { TabPanel } from '../../../shared/components/mui/TabPanels';
@@ -17,27 +18,31 @@ function Squad({
   children,
   ...rest
 }: SquadProps) {
-  const [activeTask, setActiveTask] = useState<string | undefined>();
-  useEffect(() => {
-    if (!activeTask && squad && squad.tasks && squad.tasks.length > 0) {
-      console.log('setting active task');
-      setActiveTask(squad.tasks[0].id);
-    }
-  }, [JSON.stringify(squad)]);
+  const [activeTaskIndex, setActiveTaskIndex] = useState<number>(0);
 
-  if (!squad || squadLoading || !activeTask) return <div>loading</div>;
+  if (!squad || squadLoading) return <div>loading</div>;
 
-  console.log('activeTask', activeTask);
   return (
     <VerticalTabs
-      activeTabId={activeTask as string}
-      onActiveTabIdChange={setActiveTask}
+      activeTabIndex={activeTaskIndex}
+      onActiveTabIndexChange={setActiveTaskIndex}
+      tabsTitle={(
+        <Typography
+          style={{
+            textTransform: 'uppercase',
+            textAlign: 'center',
+          }}
+        >
+          Squad Tasks
+        </Typography>
+        )}
       tabs={squad.tasks.map((t) => (
         <Tab label={getTaskDisplayName(t)} id={t.id} />
       ))}
-      tabPanels={squad.tasks.map((t) => (
+      tabPanels={squad.tasks.map((t, i) => (
         <TabPanel
-          id={t.id}
+          activeIndex={activeTaskIndex}
+          tabIndex={i}
         >
           <Task taskLoading={squadLoading} task={t} />
         </TabPanel>

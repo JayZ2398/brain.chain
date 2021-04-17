@@ -7,12 +7,15 @@ type TaskProps = PropsWithChildren<{
     task: TaskModel
 }>
 
-function Task({ children, ...rest }: TaskProps) {
+function Task({
+  task,
+  ...rest
+}: TaskProps) {
   return (
     <div
       {...rest}
     >
-      {children}
+      {task.name}
     </div>
   );
 }
