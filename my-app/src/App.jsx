@@ -1,9 +1,9 @@
-import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
 } from 'react-router-dom';
+import LoginView from './pages/login/LoginView.tsx';
 import './App.css';
 
 function About() {
@@ -11,15 +11,6 @@ function About() {
     <>
       <h1>About</h1>
       <p>About our product.</p>
-    </>
-  );
-}
-
-function Login() {
-  return (
-    <>
-      <h1>Login</h1>
-      <p>Login to your account here.</p>
     </>
   );
 }
@@ -59,7 +50,7 @@ function App() {
             <About />
           </Route>
           <Route path="/login">
-            <Login />
+            <LoginView />
           </Route>
           <Route path="/">
             <Home />

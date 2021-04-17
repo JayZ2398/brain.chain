@@ -15,10 +15,18 @@
   "plugins": ["react", "@typescript-eslint", "unused-imports"],
   "rules": {
     "@typescript-eslint/no-use-before-define": ["error"],
-    "max-len": ["error", { "ignoreStrings": true }],
+    "import/no-unresolved": "off",
+    "max-len": [
+      "error",
+      {
+        "ignoreStrings": true,
+        "ignoreComments": true,
+        "ignoreTrailingComments": true
+      }
+    ],
+    "no-unused-vars": "off",
     // note you must disable the base rule as it can report incorrect errors
     "no-use-before-define": "off",
-    "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
@@ -33,6 +41,8 @@
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unescaped-entities": 0,
     "react/react-in-jsx-scope": "off"
   }
 }
