@@ -10,6 +10,8 @@ import Task from "../../tasks/ui/Task";
 import { getTaskDisplayName } from "../../tasks/funcs";
 import { makeStyles } from "@material-ui/core/styles";
 import MeetSquad from "./MeetSquad";
+import EmptyDisplay from "../../../shared/components/EmptyDisplay";
+import UndrawChildren from "../../../shared/components/arty/UndrawChildren";
 
 type SquadProps = PropsWithChildren<{
   squad?: SquadModel;
@@ -30,7 +32,16 @@ const TasksTitle = styled.div`
 function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
   const [activeTaskIndex, setActiveTaskIndex] = useState<number>(0);
 
-  if (!squad || squadLoading) return <div>loading</div>;
+  if (!squad || squadLoading)
+    return (
+      <EmptyDisplay
+        style={{
+          gridColumns: "1 / 3",
+        }}
+        text="You haven't been assigned to a squad yet! 🐱‍🚀🐱‍🚀"
+        picture={<UndrawChildren />}
+      />
+    );
 
   const tabPanels = squad.tasks.map((t, i) => (
     <TabPanel activeIndex={activeTaskIndex} tabIndex={i}>
