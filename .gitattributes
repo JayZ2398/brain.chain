@@ -1,0 +1,7 @@
+*.html   text diff=html
+*.css    text diff=css
+*.less    text diff=css
+*.js     text
+*.jsx    text
+*.ts     text
+*.tsx    text
