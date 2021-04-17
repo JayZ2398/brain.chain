@@ -6,6 +6,7 @@ import {
 import LoginView from './pages/login/LoginView.tsx';
 import './App.css';
 import UserProvider from './shared/contexts/UserProvider';
+import { dbTest } from './shared/db/db';
 
 function About() {
   return (
@@ -41,6 +42,9 @@ function Home() {
 }
 
 function App() {
+
+  dbTest();
+
   return (
     <UserProvider>
       <Router>

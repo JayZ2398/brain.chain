@@ -15,6 +15,7 @@ app.get('/api/users', (req, res) => {
   res.json(users);
 });
 
+// Signup
 app.post('/api/user', (req, res) => {
   const user = req.body.user;
   console.log('Adding user:::::', user);
