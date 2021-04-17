@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import { ThemeProvider } from '@material-ui/core/styles';
-// eslint-disable-next-line import/no-unresolved
 import ButtonAppBar from './shared/components/header.bar.tsx';
 import GlobalTheme from './shared/styles/global.theme.tsx';
+import DashboardPage from './pages/dashboard/DashboardPage.tsx';
 
 function About() {
   return (
@@ -30,25 +30,9 @@ function Login() {
 
 function Home() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <DashboardPage />
+    </>
   );
 }
 
