@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, useState } from 'react';
 import { Box } from '@material-ui/core';
+import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
 
 import SubjectSelect from '../../pages/subjects/ui/SubjectSelect';
 import Squad from './ui/Squad';
@@ -64,6 +65,10 @@ function Squads({ children, ...rest }: SquadsProps) {
         padding={2}
       >
         <SubjectSelect />
+
+        <Box width="100%" mr={1}>
+            <LinearProgress variant="determinate" />
+        </Box>
       </Box>
       <Squad
         squad={activeSquad}

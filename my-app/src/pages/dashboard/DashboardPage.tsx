@@ -5,18 +5,26 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import LinearProgress, { LinearProgressProps } from '@material-ui/core/LinearProgress';
 
-const subjects:any = [
+import { Subject } from '../../shared/models'
+
+export const subjects: (Subject & { due: string, taskName: string })[] = [
   {
+    id: 'subject-1',
+    users: [],
     name: 'Science',
     due: '19th Jan',
     taskName: 'Plants and nature task',
   },
   {
+    id: 'subject-2',
+    users: [],
     name: 'Mathematics',
     due: '26th Jan',
     taskName: 'Pythagoras task',
   },
   {
+    id: 'subject-3',
+    users: [],
     name: 'English',
     due: '12th Jan',
     taskName: 'Shakespear task',
