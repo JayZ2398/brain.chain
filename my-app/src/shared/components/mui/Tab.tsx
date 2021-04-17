@@ -7,4 +7,8 @@ export default withStyles((theme) => ({
     borderRight: "none",
     borderLeft: "2px solid tomato",
   },
+  wrapper: {
+    textAlign: "start",
+    alignItems: "start",
+  },
 }))(Tab);
