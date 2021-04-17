@@ -12,7 +12,7 @@ const subjects:any = [
     taskName: 'Plants and nature task',
   },
   {
-    name: 'Maths',
+    name: 'Mathematics',
     due: '26th Jan',
     taskName: 'Pythagoras task',
   },
