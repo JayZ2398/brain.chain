@@ -4,7 +4,7 @@ import SubjectSelect from "../../pages/subjects/ui/SubjectSelect";
 import Squad from "./ui/Squad";
 import { Squad as SquadModel } from "../../shared/models";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
-import Container from "@material-ui/core/Container"
+import Container from "@material-ui/core/Container";
 
 type SquadsProps = PropsWithChildren<{}>;
 
@@ -58,13 +58,14 @@ function Squads({ children, ...rest }: SquadsProps) {
   }
 
   return (
-    <Container maxWidth="md">
+    <>
       <SubjectSelect />
-
-      <LinearProgressWithLabel value={80} />
-
       <Squad squad={activeSquad} squadLoading={false} />
-    </Container>
+      <Container maxWidth="xl">
+        <LinearProgressWithLabel value={80} />
+
+      </Container>
+    </>
   );
 }
 
