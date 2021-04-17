@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import LoginView from './pages/login/LoginView.tsx';
 import './App.css';
+import UserProvider from './shared/contexts/UserProvider';
 
 function About() {
   return (
@@ -41,23 +42,25 @@ function Home() {
 
 function App() {
   return (
-    <Router>
-      <div>
-        {/* A <Switch> looks through its children <Route>s and
+    <UserProvider>
+      <Router>
+        <div>
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/login">
-            <LoginView />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/login">
+              <LoginView />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </UserProvider>
   );
 }
 
