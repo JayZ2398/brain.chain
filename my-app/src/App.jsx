@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
+import ButtonAppBar from './components/header.bar.tsx';
 
 function About() {
   return (
@@ -64,6 +65,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/">
+            <ButtonAppBar />
             <Home />
           </Route>
         </Switch>
