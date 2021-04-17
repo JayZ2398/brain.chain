@@ -1,11 +1,11 @@
 import React, { PropsWithChildren, useState, Fragment } from "react";
-import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 
 import { Squad as SquadModel } from "../../../shared/models";
 import VerticalTabs, {
   TabPanel,
 } from "../../../shared/components/mui/TabPanels";
+import Tab from "../../../shared/components/mui/Tab";
 import Task from "../../tasks/ui/Task";
 import { getTaskDisplayName } from "../../tasks/funcs";
 import { makeStyles } from "@material-ui/core/styles";

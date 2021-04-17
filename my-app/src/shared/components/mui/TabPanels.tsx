@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, ReactNode } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 
 export function TabPanel(props: any) {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     height: 224,
   },
   tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
+    borderLeft: `1px solid ${theme.palette.divider}`,
   },
 }));
 
@@ -38,7 +38,16 @@ type VerticalTabsProps = PropsWithChildren<{
   tabPanels: ReactNode[];
 }>;
 
-export default function VerticalTabs({
+const VertPanels = withStyles((theme) => ({
+  flexContainer: {
+    flexDirection: "column",
+  },
+  indicator: {
+    display: "none",
+  },
+}))(Tabs);
+
+export default function TabPanels({
   activeTabIndex,
   onActiveTabIndexChange,
   tabs,
@@ -52,7 +61,7 @@ export default function VerticalTabs({
     <>
       <div>
         {tabsTitle}
-        <Tabs
+        <VertPanels
           orientation="vertical"
           variant="scrollable"
           value={activeTabIndex}
@@ -63,7 +72,7 @@ export default function VerticalTabs({
           className={classes.tabs}
         >
           {tabs}
-        </Tabs>
+        </VertPanels>
       </div>
 
       <div>{tabPanels}</div>
