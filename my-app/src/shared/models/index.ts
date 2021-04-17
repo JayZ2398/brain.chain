@@ -17,8 +17,7 @@ export type SquadData = {
   tasks: Task[];
 };
 
-export type Account = WithId & AccountData;
-export type AccountData = {
+export type Account = {
   email: string;
   password: string;
 };

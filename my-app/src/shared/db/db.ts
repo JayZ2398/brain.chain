@@ -5,47 +5,84 @@ function withId<T>(object: T): T & { id: string } {
   return { id: uuid(), ...object };
 }
 
-class Database {
+export class Database {
   users: Map<string, types.User>;
+  accounts: Map<string, types.Account>;
 
   constructor() {
     this.users = new Map();
+    this.accounts = new Map();
+    this.dbTest();
   }
 
-  // add user
+  // Sanity check, drop whatever you want here
+  async dbTest() {
+    const userData: types.UserData = {
+      name: "Jack",
+      email: "jack@gmail.com",
+      subjects: [],
+      squads: [],
+    };
+    let user = await this.createUser(userData);
+    console.log("Got user: ", this.getUser(user.id));
+    const newUserData = { ...userData, name: "Jonah" };
+
+    user = await this.updateUser(user.id, newUserData);
+    console.log("Updated user: ", user);
+
+    // account
+    let accountData = {
+      email: "jack@gmail.com",
+      password: "password123",
+    };
+    await this.createAccount(accountData);
+  }
+
   async createUser(userData: types.UserData) {
     const users = Array.from(this.users.values());
     // There is no existing user
     if (!users.map((user) => user.email).includes(userData.email)) {
-      const user = withId(userData);
+      const user: types.User = withId(userData);
       this.users.set(user.id, user);
-      console.log('Created user: ', user);
+      console.log("Created user: ", user);
       return user;
     }
     throw Error();
   }
 
-  // async getUser(id: string) {
-  //   const res = this.users[id];
-  //   if (res) return res;
-  //   throw Error("Not found");
-  // }
-
-  async updateUser() {}
-}
-
-export function dbTest() {  
-  const db = new Database();
-  const newUserData : types.UserData = {
-    name: 'Jack',
-    email: 'jack@gmail.com',
-    subjects: [],
-    squads: []
+  async getUser(id: string) {
+    const res = this.users.get(id);
+    if (res) return res;
+    throw Error("Not found");
   }
-  db.createUser(newUserData);
+
+  async updateUser(id: string, userData: types.UserData) {
+    const user = await this.getUser(id);
+    if (user) {
+      const newUser: types.User = { ...userData, id };
+      this.users.set(id, newUser);
+      return newUser;
+    }
+    throw Error();
+  }
+
+  async createAccount(accountData: types.Account) {
+    const accountEmails = Array.from(this.users.keys());
+    // There is no existing user
+    if (!accountEmails.includes(accountData.email)) {
+      this.accounts.set(accountData.email, accountData);
+      console.log("Created account: ", accountData);
+      return accountData;
+    }
+    throw Error();
+  }
+
+  async getAccount(email: string) {
+    const res = this.accounts.get(email);
+    if (res) return res;
+    throw Error("Not found");
+  }
 }
-  
-// get (login with) user
 
 // given user
 

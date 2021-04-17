@@ -1,12 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
-import LoginView from './pages/login/LoginView.tsx';
-import './App.css';
-import UserProvider from './shared/contexts/UserProvider';
-import { dbTest } from './shared/db/db';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import LoginView from "./pages/login/LoginView.tsx";
+import "./App.css";
+import UserProvider from "./shared/contexts/UserProvider";
+import { Database } from "./shared/db/db";
 
 function About() {
   return (
@@ -22,11 +19,7 @@ function Home() {
     <div className="App">
       <header className="App-header">
         <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
+          Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
           className="App-link"
@@ -41,30 +34,31 @@ function Home() {
   );
 }
 
+const DatabaseContext = React.createContext(new Database());
+
 function App() {
-
-  dbTest();
-
   return (
-    <UserProvider>
-      <Router>
-        <div>
-          {/* A <Switch> looks through its children <Route>s and
+    <DatabaseContext.Provider>
+      <UserProvider>
+        <Router>
+          <div>
+            {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/login">
-              <LoginView />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    </UserProvider>
+            <Switch>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/login">
+                <LoginView />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </UserProvider>
+    </DatabaseContext.Provider>
   );
 }
 
