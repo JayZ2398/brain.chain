@@ -5,7 +5,10 @@ import {
   Route,
 } from 'react-router-dom';
 import './App.css';
-import ButtonAppBar from './components/header.bar.tsx';
+import { ThemeProvider } from '@material-ui/core/styles';
+// eslint-disable-next-line import/no-unresolved
+import ButtonAppBar from './shared/components/header.bar.tsx';
+import GlobalTheme from './shared/styles/global.theme.tsx';
 
 function About() {
   return (
@@ -52,22 +55,25 @@ function Home() {
 function App() {
   return (
     <Router>
-      <div>
-        {/* A <Switch> looks through its children <Route>s and
+      <ThemeProvider theme={GlobalTheme}>
+
+        <div>
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/">
-            <ButtonAppBar />
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/">
+              <ButtonAppBar />
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </ThemeProvider>
     </Router>
   );
 }
