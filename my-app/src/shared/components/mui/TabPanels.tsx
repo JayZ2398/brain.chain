@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, ReactNode } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Tabs from "@material-ui/core/Tabs";
+import MuiTabs from "@material-ui/core/Tabs";
 
 export function TabPanel(props: any) {
   const { children, activeIndex, tabIndex, ...other } = props;
@@ -35,7 +35,7 @@ type VerticalTabsProps = PropsWithChildren<{
   onActiveTabIndexChange: (x: number) => void;
   tabsTitle: ReactNode;
   tabs: ReactNode[];
-  tabPanels: ReactNode[];
+  style: any;
 }>;
 
 const VertPanels = withStyles((theme) => ({
@@ -45,37 +45,32 @@ const VertPanels = withStyles((theme) => ({
   indicator: {
     display: "none",
   },
-}))(Tabs);
+}))(MuiTabs);
 
-export default function TabPanels({
+export default function Tabs({
   activeTabIndex,
   onActiveTabIndexChange,
   tabs,
-  tabPanels,
   tabsTitle,
+  ...rest
 }: VerticalTabsProps) {
   const classes = useStyles();
 
   return (
-    // <div className={classes.root}>
-    <>
-      <div>
-        {tabsTitle}
-        <VertPanels
-          orientation="vertical"
-          variant="scrollable"
-          value={activeTabIndex}
-          onChange={(ev, v) => {
-            onActiveTabIndexChange(v);
-          }}
-          aria-label="Vertical tabs example"
-          className={classes.tabs}
-        >
-          {tabs}
-        </VertPanels>
-      </div>
-
-      <div>{tabPanels}</div>
-    </>
+    <div {...rest}>
+      {tabsTitle}
+      <VertPanels
+        orientation="vertical"
+        variant="scrollable"
+        value={activeTabIndex}
+        onChange={(ev, v) => {
+          onActiveTabIndexChange(v);
+        }}
+        aria-label="Vertical tabs example"
+        className={classes.tabs}
+      >
+        {tabs}
+      </VertPanels>
+    </div>
   );
 }

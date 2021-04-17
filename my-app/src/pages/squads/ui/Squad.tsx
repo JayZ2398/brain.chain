@@ -32,27 +32,40 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
 
   if (!squad || squadLoading) return <div>loading</div>;
 
+  const tabPanels = squad.tasks.map((t, i) => (
+    <TabPanel activeIndex={activeTaskIndex} tabIndex={i}>
+      <Task taskLoading={squadLoading} task={t} />
+    </TabPanel>
+  ));
+
   return (
     <>
+      <div
+        style={{
+          gridArea: "tasks",
+        }}
+      >
+        {tabPanels}
+      </div>
+
       <MeetSquad
         squad={squad}
         squadLoading={squadLoading}
         style={{
-          gridColumnStart: 2,
-          gridColumnEnd: 3,
+          gridArea: "meet-squad",
+          display: "block",
         }}
       />
+
       <VerticalTabs
+        style={{
+          gridArea: "task-nav",
+        }}
         activeTabIndex={activeTaskIndex}
         onActiveTabIndexChange={setActiveTaskIndex}
         tabsTitle={<TasksTitle>Squad Tasks</TasksTitle>}
         tabs={squad.tasks.map((t) => (
           <Tab label={getTaskDisplayName(t)} id={t.id} />
-        ))}
-        tabPanels={squad.tasks.map((t, i) => (
-          <TabPanel activeIndex={activeTaskIndex} tabIndex={i}>
-            <Task taskLoading={squadLoading} task={t} />
-          </TabPanel>
         ))}
       />
     </>

@@ -14,9 +14,13 @@ import { unwrapValueThen } from "../../shared/js";
 const Outerlayout = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: minmax(0, auto) 1fr;
   grid-template-rows: min-content min-content 1fr;
-  grid-gap: 32px 16px;
+  grid-template-areas:
+    "subject-select progress"
+    "task-nav       meet-squad"
+    "filler         tasks";
+  grid-gap: 5vh 5vw;
 `;
 
 type SquadsProps = PropsWithChildren<{}>;
@@ -41,21 +45,14 @@ function Squads({ children, ...rest }: SquadsProps) {
     }
   }
 
-  const d = usersSubjects.find((s) => s.id === activeSquad?.subjectId);
-  console.log("d", d);
-
   return (
     <Outerlayout>
       <SubjectSelect
         value={usersSubjects.find((s) => s.id === activeSquad?.subjectId)?.id}
-        // onChange={(x) => {
-        //   console.log("onChange", x);
-        // }}
         onChange={unwrapValueThen((subjId) => {
           const userSquadForSubject = usersSquads.find(
             (s) => s.subjectId === subjId
           )?.id;
-          console.log("userSquadForSubject", userSquadForSubject);
           setActiveSquadId(userSquadForSubject);
         })}
       />

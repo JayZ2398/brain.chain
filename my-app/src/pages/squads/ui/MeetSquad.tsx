@@ -3,12 +3,21 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import { WithStyle } from "../../../shared/types";
+import styled from "styled-components";
 
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 
 import { Squad } from "../../../shared/models";
+
+const CardLayout = styled.div`
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-rows: min-content;
+  grid-gap: 5vh 5vw;
+`;
 
 type MeetSquadProps = PropsWithChildren<{
   squad?: Squad;
@@ -31,9 +40,9 @@ function MeetSquad({ squad, squadLoading, ...rest }: MeetSquadProps) {
         </Typography>
       </Grid>
 
-      <Grid item container spacing={3}>
-        {squad.users.map((u) => (
-          <Grid item xs={12} md={6} lg={4}>
+      <Grid item>
+        <CardLayout>
+          {squad.users.map((u) => (
             <Card variant="outlined">
               <CardActionArea>
                 <CardMedia
@@ -50,8 +59,8 @@ function MeetSquad({ squad, squadLoading, ...rest }: MeetSquadProps) {
                 </CardContent>
               </CardActionArea>
             </Card>
-          </Grid>
-        ))}
+          ))}
+        </CardLayout>
       </Grid>
     </Grid>
   );
