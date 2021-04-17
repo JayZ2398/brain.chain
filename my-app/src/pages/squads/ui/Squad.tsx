@@ -1,8 +1,6 @@
 import React, { PropsWithChildren, useState } from "react";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box"
-
+import Box from "@material-ui/core/Box";
 import { Squad as SquadModel } from "../../../shared/models";
 import VerticalTabs, {
   TabPanel,
@@ -16,7 +14,6 @@ type SquadProps = PropsWithChildren<{
   squadLoading: boolean;
 }>;
 
-
 const useTabStyles = makeStyles((theme) => ({
   wrapper: {
     textTransform: "none",
@@ -24,10 +21,11 @@ const useTabStyles = makeStyles((theme) => ({
   },
 }));
 
+
 function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
   const [activeTaskIndex, setActiveTaskIndex] = useState<number>(0);
-
   const tabStyles = useTabStyles();
+
   if (!squad || squadLoading) return <div>loading</div>;
 
 
@@ -36,9 +34,8 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
       activeTabIndex={activeTaskIndex}
       onActiveTabIndexChange={setActiveTaskIndex}
       tabsTitle={
-        // <TasksTitle>Squad Tasks</TasksTitle>
-        <Box marginBottom="16px" paddingLeft="12px" color="#00000066" >
-            SQUAD TASKS
+        <Box marginBottom="16px" paddingLeft="12px" color="#00000066">
+          SQUAD TASKS
         </Box>
       }
       tabs={squad.tasks.map((t) => (
