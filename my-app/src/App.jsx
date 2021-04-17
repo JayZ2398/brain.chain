@@ -1,8 +1,31 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+function About() {
+  return (
+    <>
+      <h1>About</h1>
+      <p>About our product.</p>
+    </>
+  );
+}
+
+function Login() {
+  return (
+    <>
+      <h1>Login</h1>
+      <p>Login to your account here.</p>
+    </>
+  );
+}
+
+function Home() {
   return (
     <div className="App">
       <header className="App-header">
@@ -24,6 +47,28 @@ function App() {
         </a>
       </header>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <div>
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
