@@ -56,7 +56,8 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
         onActiveTabIndexChange={setActiveTaskIndex}
         tabsTitle={<TasksTitle>Squad Tasks</TasksTitle>}
         tabs={squad.tasks.map((t) => (
-          <Tab classes={tabStyles} label={getTaskDisplayName(t)} id={t.id} />
+          //   <Tab classes={tabStyles} label={getTaskDisplayName(t)} id={t.id} />
+          <Tab label={getTaskDisplayName(t)} id={t.id} />
         ))}
         tabPanels={squad.tasks.map((t, i) => (
           <TabPanel activeIndex={activeTaskIndex} tabIndex={i}>

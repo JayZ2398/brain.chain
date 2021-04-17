@@ -142,7 +142,10 @@ export function dayEqual(d1: string | Dayjs, d2: string | Dayjs) {
     const d1d = typeof d1 === 'string' ? dateStringToDayjs(d1) : d1
     const d2d = typeof d2 === 'string' ? dateStringToDayjs(d2) : d2
 
-    return d1d.startOf('day').isSame(d2d.startOf('day'))
+    if (!d1d || !d2d)
+        return d1d === d2d
+    else
+        return d1d.startOf('day').isSame(d2d.startOf('day'))
 }
 
 export function addTimeOfDay(date: Dayjs, timeOfDay: Dayjs) {

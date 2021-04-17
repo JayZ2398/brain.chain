@@ -5,30 +5,7 @@ import Container from "@material-ui/core/Container";
 
 import { Subject } from "../../shared/models";
 import LinearProgressWithLabel from "../../shared/components/LinearProgressWithLabel";
-
-export const subjects: (Subject & { due: string; taskName: string })[] = [
-  {
-    id: "subject-1",
-    users: [],
-    name: "Science",
-    due: "19th Jan",
-    taskName: "Plants and nature task",
-  },
-  {
-    id: "subject-2",
-    users: [],
-    name: "Mathematics",
-    due: "26th Jan",
-    taskName: "Pythagoras task",
-  },
-  {
-    id: "subject-3",
-    users: [],
-    name: "English",
-    due: "12th Jan",
-    taskName: "Shakespear task",
-  },
-];
+import { subjects } from "../../shared/data";
 
 export default function DashboardPage() {
   return (

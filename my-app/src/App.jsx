@@ -11,31 +11,32 @@ import GlobalTheme from './shared/styles/global.theme.tsx';
 import DashboardPage from './pages/dashboard/DashboardPage.tsx';
 import LoginView from './pages/login/LoginView';
 import Squads from './pages/squads/Squads';
+import Page from './shared/components/Page'
 
 function App() {
   return (
     <Router>
       <ThemeProvider theme={GlobalTheme}>
-
         <div
-          style={{ width: '100%', height: '100%' }}
+          style={{ display: "flex", flexDirection: 'column', height: '100%' }}
         >
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
             <Route path="/login">
               <LoginView />
             </Route>
             <Route path="/squads">
               <ButtonAppBar />
-              <Squads />
+              <Page>
+                <Squads />
+              </Page>
             </Route>
             <Route path="/">
               <ButtonAppBar />
-              <DashboardPage />
+              <Page>
+                <DashboardPage />
+              </Page>
             </Route>
           </Switch>
         </div>

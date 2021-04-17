@@ -20,7 +20,10 @@ export type User = WithId & {
     displayPicture?: string,
 
     subjects: Subject[],
+    subjectIds: string[],
+    squadIds: string[],
     squads: Squad[],
+    commentIds: string[],
     comments: Comment[]
 }
 
