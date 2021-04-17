@@ -3,7 +3,6 @@ export type type<TObj = {}, TId = string> = TObj & { id: TId };
 export type Subject = type & SubjectData;
 export type SubjectData = {
   name: string;
-  users: User[];
 };
 
 export type Squad = type & SquadData;
@@ -35,9 +34,6 @@ export type Task = type & TaskData;
 export type TaskData = {
   name: string;
   text: string;
-  subject: Subject;
-
-  squad?: Squad;
   comments: Comment[];
   due?: string;
 };

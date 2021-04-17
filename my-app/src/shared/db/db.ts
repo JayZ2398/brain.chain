@@ -1,14 +1,22 @@
 import { v4 as uuid } from "uuid";
+import { someComment } from "../models/fakeData";
 import * as type from "../models/index";
-import { fakeUsers, fakeAccounts } from "./initialFakeData";
+import {
+  fakeUsers,
+  fakeAccounts,
+  fakeSquads,
+  fakeSubjects,
+} from "./initialFakeData";
 
-function withId<T>(object: T): T & { id: string } {
+export function withId<T>(object: T): T & { id: string } {
   return { id: uuid(), ...object };
 }
 
 export default class Database {
   users: Map<string, type.User>;
   accounts: Map<string, type.Account>;
+  squads: Map<string, type.Squad>;
+  subjects: Map<string, type.Subject>;
 
   constructor() {
     this.users = new Map();
@@ -16,6 +24,18 @@ export default class Database {
 
     this.accounts = new Map();
     fakeAccounts.forEach((account) => this.createAccount(account));
+
+    this.squads = new Map();
+    fakeSquads.forEach((squad) => this.insertSquad(squad));
+    // Define relations from user->squad in fake data
+    this.users.forEach((user) =>
+      user.squads.forEach((squad) => {
+        this.addToSquad(user, squad);
+      })
+    );
+
+    this.subjects = new Map();
+    fakeSubjects.forEach((subject) => this.insertSubject(subject));
   }
 
   // Sanity check, drop whatever you want here
@@ -41,6 +61,25 @@ export default class Database {
     await this.createAccount(accountData);
   }
 
+  // Account
+  async createAccount(accountData: type.Account) {
+    const accountEmails = Array.from(this.accounts.keys());
+    // There is no existing user
+    if (!accountEmails.includes(accountData.email)) {
+      this.accounts.set(accountData.email, accountData);
+      console.log("Created account: ", accountData);
+      return accountData;
+    }
+    throw Error();
+  }
+
+  async getAccount(email: string) {
+    const res = this.accounts.get(email);
+    if (res) return res;
+    throw Error("Not found");
+  }
+
+  // User
   async createUser(userData: type.User) {
     const users = Array.from(this.users.values());
     // There is no existing user
@@ -72,38 +111,36 @@ export default class Database {
     throw Error();
   }
 
-  async createAccount(accountData: type.Account) {
-    const accountEmails = Array.from(this.accounts.keys());
-    // There is no existing user
-    if (!accountEmails.includes(accountData.email)) {
-      this.accounts.set(accountData.email, accountData);
-      console.log("Created account: ", accountData);
-      return accountData;
-    }
-    throw Error();
+  // Squads
+  async insertSquad(squad: type.Squad) {
+    this.squads.set(squad.id, squad);
   }
 
-  async getAccount(email: string) {
-    const res = this.accounts.get(email);
-    if (res) return res;
-    throw Error("Not found");
+  // User->Squads
+  async addToSquad(user: type.User, squad: type.Squad) {
+    try {
+      if (!squad.users.includes(user)) squad.users.push(user);
+      if (!user.squads.includes(squad)) user.squads.push(squad);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // Subjects
+  async insertSubject(subject: type.Subject) {
+    this.subjects.set(subject.id, subject);
+  }
+
+  // get user tasks
+  async getUserTasks(user: type.User) {
+    const tasks: type.Task[] = [];
+    user.squads.forEach((squad) => tasks.concat(squad.tasks));
+    return tasks;
+  }
+
+  // create comment
+  async createComment(commentData: type.CommentData, task: type.Task) {
+    const newComment = someComment(commentData);
+    task.comments.push(newComment);
   }
 }
-
-// given user
-
-// get user tasks
-
-// get user squads
-
-// given task
-
-// get users
-
-// get description
-
-// get discussion
-
-// update discussion (add comment)
-
-// add comment
