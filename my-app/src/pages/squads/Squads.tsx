@@ -53,7 +53,7 @@ const squads: SquadModel[] = [
     tasks: [
       {
         id: "task-1",
-        name: "What is photosynthesis",
+        name: "What is photosynthesis 🌱",
         text: "Last week we explored plant biology, what does this word mean?",
         due: "2021-04-18T05:00:00+1000",
 
@@ -61,8 +61,8 @@ const squads: SquadModel[] = [
       },
       {
         id: "task-2",
-        name: "What does pythag's theorem mean?",
-        text: "Last week we explored plant biology, what does this word mean?",
+        name: "What does pythag's theorem mean? 📐",
+        text: "Something about triangles...",
         due: "2021-04-19T08:00:00+0000",
 
         comments: [],

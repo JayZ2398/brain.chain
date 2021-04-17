@@ -24,7 +24,7 @@ function MeetSquad({ squad, squadLoading, ...rest }: MeetSquadProps) {
   return (
     <Grid container direction="column" spacing={2} {...rest}>
       <Grid item>
-        <Typography variant="h5">Meet your Squad</Typography>
+        <Typography variant="h5">Meet your Squad 👋</Typography>
       </Grid>
 
       <Grid item>
