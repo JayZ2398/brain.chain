@@ -1,3 +1,4 @@
+// Taken from https://github.com/mui-org/material-ui/blob/master/docs/src/pages/getting-started/templates/sign-in/SignIn.js
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -12,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { signInWithGoogle } from '../../shared/firebase/firebase';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,6 +33,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  googleSignInIcon: {
+    justifySelf: 'start',
+  },
 }));
 
 function Copyright() {
@@ -47,7 +52,7 @@ function Copyright() {
   );
 }
 
-export default function SignIn() {
+export default function LoginView() {
   const classes = useStyles();
 
   return (
@@ -95,6 +100,24 @@ export default function SignIn() {
             className={classes.submit}
           >
             Sign In
+          </Button>
+          <Button
+            onClick={signInWithGoogle}
+            className={classes.submit}
+            fullWidth
+            variant="outlined"
+            color="primary"
+          >
+            <Grid container direction="row" justify="center" alignItems="center">
+              <Grid item component={Box} marginRight="auto">
+                <Grid container justify="center" alignItems="center">
+                  <img src="https://img.icons8.com/dusk/64/000000/google-logo--v1.png" alt="google logo" />
+                </Grid>
+              </Grid>
+              <Box marginRight="auto">
+                <span> Continue with Google</span>
+              </Box>
+            </Grid>
           </Button>
           <Grid container>
             <Grid item xs>
