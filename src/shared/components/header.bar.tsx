@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import ClassList from './class.list';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -21,6 +23,21 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+  const toggleDrawer = (open: boolean) => (
+    event: React.KeyboardEvent | React.MouseEvent,
+  ) => {
+    if (
+      event.type === 'keydown'
+      && ((event as React.KeyboardEvent).key === 'Tab'
+        || (event as React.KeyboardEvent).key === 'Shift')
+    ) {
+      return;
+    }
+
+    setDrawerOpen(open);
+  };
 
   return (
     <div className={classes.root}>
@@ -31,13 +48,20 @@ export default function ButtonAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
+            onClick={toggleDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
+          <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
+            {ClassList()}
+          </Drawer>
+
           <Typography variant="h6" className={classes.title}>
-            News
+            Ms. Doherty’s Science Class
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">My Squad</Button>
+          <Button color="inherit">My Class</Button>
+          <Button color="inherit">My Progress</Button>
         </Toolbar>
       </AppBar>
     </div>
