@@ -10,3 +10,12 @@ services:
     volumes:
       - ./my-app:/usr/src/app/my-app
       - /usr/src/app/my-app/node_modules
+  nodejs-server:
+    build:
+      context: ./api
+    ports:
+      - "3080:3080"
+    container_name: node-api
+    volumes:
+      - ./api:/usr/src/app/api
+      - /usr/src/app/api/node_modules
