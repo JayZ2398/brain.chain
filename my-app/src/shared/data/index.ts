@@ -1,4 +1,10 @@
-import { Squad as SquadModel, User, Subject, Task } from "../../shared/models";
+import {
+  Squad as SquadModel,
+  User,
+  Subject,
+  Task,
+  Comment,
+} from "../../shared/models";
 
 export const user: User = {
   id: "user-1",
@@ -14,6 +20,8 @@ export const user: User = {
   squadIds: [],
   squads: [],
 };
+
+export const comments: Comment[] = [];
 
 export const subjects: Subject[] = [
   {
@@ -73,20 +81,14 @@ export const users: User[] = [
     squadIds: [],
     squads: [],
   },
-]
-
-
+];
 
 export const squads: SquadModel[] = [
   {
     id: "squad-1",
     name: "BioBrains",
     subjectId: "subject-1",
-    users: [
-      "user-1",
-      "user-2",
-      "user-3",
-    ],
+    users: ["user-1", "user-2", "user-3"],
     tasks: [
       {
         id: "task-1",
