@@ -9,13 +9,13 @@ const GlobalTheme = createMuiTheme({
       main: "#646EFB",
     },
     background: {
-      default: "#FDF7FF",
+      default: "#FCF5FF",
     },
   },
   typography: {
     h5: {
       fontSize: "18pt",
-      fontWeight: 600
+      fontWeight: 600,
     },
     h6: {
       fontSize: "13pt",

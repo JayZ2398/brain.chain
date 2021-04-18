@@ -25,11 +25,11 @@ import Page from "./shared/components/Page";
 function App() {
   return (
     <DatabaseContextProvider>
-      <CssBaseline />
       <UserProvider>
         <Router>
           <ReduxProvider store={store}>
             <ThemeProvider theme={GlobalTheme}>
+      <CssBaseline />
               <div style={{ width: "100%", height: "100%" }}>
                 {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
