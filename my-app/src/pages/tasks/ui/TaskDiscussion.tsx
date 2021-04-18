@@ -21,7 +21,7 @@ function TaskDiscussion({ task, comments, loading }: TaskDiscussionProps) {
   return (
     <List component="nav">
       {comments.map((c) => (
-        <CommentCard user={userDict[c.id]} comment={c} />
+        <CommentCard user={userDict[c.userId]} comment={c} />
       ))}
     </List>
   );

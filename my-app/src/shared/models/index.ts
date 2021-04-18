@@ -43,6 +43,8 @@ export type Task = WithId & {
 };
 
 export type Comment = WithId & {
+  userId: string;
+  parentId?: string;
   isTaskComment: boolean;
   taskId: string;
   isQuestion: boolean;

@@ -21,7 +21,49 @@ export const user: User = {
   squads: [],
 };
 
-export const comments: Comment[] = [];
+export const comments: Comment[] = [
+  {
+    id: "comment-1",
+    userId: "user-1",
+    taskId: "task-1",
+    isTaskComment: true,
+    isQuestion: true,
+    parentId: undefined,
+    text:
+      "Okay, sunlight gives a plant energy, but why does a plant need energy?",
+  },
+
+  {
+    id: "comment-2",
+    userId: "user-2",
+    taskId: "task-1",
+    isTaskComment: true,
+    isQuestion: true,
+    parentId: undefined,
+    text: "Do people photosynthesise too?",
+  },
+
+  {
+    id: "comment-3",
+    userId: "user-1",
+    taskId: "task-2",
+    isTaskComment: true,
+    isQuestion: true,
+    parentId: undefined,
+    text: "How can I understand pythag's theorem geometrically?",
+  },
+
+  {
+    id: "comment-4",
+    userId: "user-3",
+    taskId: "task-2",
+    isTaskComment: true,
+    isQuestion: false,
+    parentId: "comment-3",
+    text:
+      "Hey John! Here's a picture that might help: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pythagorean.svg/390px-Pythagorean.svg.png",
+  },
+];
 
 export const subjects: Subject[] = [
   {

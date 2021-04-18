@@ -47,6 +47,7 @@ export function someSubject(subjectData: Partial<type.Subject>) {
 
 const defaultCommentData: type.Comment = {
   id: "comment_id",
+  userId: "bob_dill",
   taskId: "task_id",
   isTaskComment: true,
   text: "Is the mitochondria the powerhouse of the cell?",
