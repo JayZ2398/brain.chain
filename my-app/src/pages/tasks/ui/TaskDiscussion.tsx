@@ -1,6 +1,7 @@
 import React from "react";
 import CommentCard from "../../../pages/comments/ui/CommentCard";
 import List from "@material-ui/core/List";
+import styled from "styled-components";
 
 import { useKeyById } from "../../../shared/hooks/misc";
 import { Comment, Task, User } from "../../../shared/models";
@@ -13,6 +14,17 @@ interface TaskDiscussionProps {
   loading?: boolean;
 }
 
+interface CommentCardStyledProps {
+  isChild?: boolean;
+}
+const CommentCardStyled = styled(CommentCard)`
+  ${({ isChild }: CommentCardStyledProps) =>
+    isChild &&
+    `
+        margin-left: 56px;
+  `}
+`;
+
 function TaskDiscussion({ task, comments, loading }: TaskDiscussionProps) {
   if (loading) return <div> loadign </div>;
 
@@ -20,9 +32,16 @@ function TaskDiscussion({ task, comments, loading }: TaskDiscussionProps) {
 
   return (
     <List component="nav">
-      {comments.map((c) => (
-        <CommentCard user={userDict[c.userId]} comment={c} />
-      ))}
+      {comments.map((c) => {
+        console.log("parentId", c.parentId);
+        return (
+          <CommentCardStyled
+            user={userDict[c.userId]}
+            comment={c}
+            isChild={c.parentId !== undefined}
+          />
+        );
+      })}
     </List>
   );
 }

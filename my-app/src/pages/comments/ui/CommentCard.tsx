@@ -11,9 +11,13 @@ interface CommentCardProps {
   comment: Comment;
 }
 
-export default function CommentCard({ comment, user }: CommentCardProps) {
+export default function CommentCard({
+  comment,
+  user,
+  ...rest
+}: CommentCardProps) {
   return (
-    <ListItem>
+    <ListItem {...rest}>
       <ListItemAvatar>
         <Avatar
           alt="Jasmine"
