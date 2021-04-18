@@ -13,8 +13,12 @@ const GlobalTheme = createMuiTheme({
     },
   },
   typography: {
-    h6: {
+    h5: {
       fontSize: "18pt",
+      fontWeight: 600
+    },
+    h6: {
+      fontSize: "13pt",
       fontWeight: 600,
     },
     subtitle2: {

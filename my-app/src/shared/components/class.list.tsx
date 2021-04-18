@@ -44,7 +44,7 @@ const ClassList = () => {
           />
         </Box>
         <Box padding="15px">
-          <Typography variant="h6">Jasmine</Typography>
+          <Typography variant="h5">Jasmine</Typography>
           <Typography>Year 7, Morley High School</Typography>
         </Box>
         <Divider />

@@ -79,7 +79,7 @@ export default function ButtonAppBar() {
             </Box>
 
             <Button color="inherit" component={RouterLink} to="/dashboard">
-              <Typography variant="h5" color="secondary">
+              <Typography variant="h6" color="secondary" style={{textTransform: "none"}}>
                 Home
               </Typography>
             </Button>
