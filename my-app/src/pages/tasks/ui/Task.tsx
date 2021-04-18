@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
@@ -8,6 +8,7 @@ import DueIndicator from "./DueIndicator";
 import { UpperSubTitle } from "../../../shared/components";
 import TaskDiscussion from "../../tasks/ui/TaskDiscussion";
 import { comments } from "../../../shared/data";
+import AddComment from "../../comments/ui/AddComment";
 
 type TaskProps = PropsWithChildren<{
   taskLoading: boolean;
@@ -16,6 +17,9 @@ type TaskProps = PropsWithChildren<{
 
 function Task({ task, ...rest }: TaskProps) {
   const taskComments = comments.filter((c) => c.taskId === task.id);
+
+  const [commentText, setCommentText] = useState<string | undefined>(undefined);
+  function handleSubmitComment() {}
 
   return (
     <div {...rest}>
@@ -36,8 +40,27 @@ function Task({ task, ...rest }: TaskProps) {
         </Grid>
 
         <Grid item>
-          <UpperSubTitle> Discussion </UpperSubTitle>
-          <TaskDiscussion comments={taskComments} task={task} />
+          <Grid container spacing={4}>
+            <Grid item>
+              <UpperSubTitle> Discussion </UpperSubTitle>
+              <TaskDiscussion comments={taskComments} task={task} />
+            </Grid>
+            <Grid
+              style={{
+                width: "100%",
+              }}
+              item
+            >
+              <AddComment
+                value={commentText}
+                onChange={setCommentText}
+                onSubmit={handleSubmitComment}
+                style={{
+                  width: "100%",
+                }}
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </div>
