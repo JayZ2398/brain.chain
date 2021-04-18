@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
 import ClassList from "./class.list";
+import Box from "@material-ui/core/Box";
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
@@ -51,29 +52,40 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
+          <Box
+            display="flex"
+            flexDirection="row"
+            style={{justifyContent: "space-between"}}
+            width="100%"
           >
-            <MenuIcon />
-          </IconButton>
-          <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-            {ClassList()}
-          </Drawer>
+            <Box display="flex">
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+                onClick={toggleDrawer(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Drawer
+                anchor="left"
+                open={drawerOpen}
+                onClose={toggleDrawer(false)}
+              >
+                {ClassList()}
+              </Drawer>
+              <img src={window.location.origin + "/logo.svg"} alt="Logo" />
+            </Box>
 
-          <Typography variant="h6" className={classes.title}>
-            Ms. Doherty’s Science Class
-          </Typography>
-          <Button color="inherit" component={RouterLink} to="/squads">
-            My Squad
-          </Button>
-          <Button color="inherit" component={RouterLink} to="/">
-            My Class
-          </Button>
-          <Button color="inherit">My Progress</Button>
+            <Button color="inherit" component={RouterLink} to="/">
+              <Typography variant="h5" color="secondary">
+                Home
+              </Typography>
+            </Button>
+          </Box>
+
+          {/* <Button color="inherit">My Progress</Button> */}
         </Toolbar>
       </AppBar>
     </div>

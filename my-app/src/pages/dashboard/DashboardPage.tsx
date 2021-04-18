@@ -35,7 +35,7 @@ export default function DashboardPage() {
     <Container maxWidth={"md"}>
       <Grid container spacing={6} direction="column">
         <Grid item>
-          <Typography variant="h3">Subjects</Typography>
+          <Typography variant="h4">Subjects</Typography>
         </Grid>
         <Grid item container spacing={3}>
           {squadsWithSubjects.map((squad: SquadWithSubject) => (
@@ -52,7 +52,7 @@ export default function DashboardPage() {
         </Grid>
 
         <Grid item>
-          <Typography variant="h3">Progress</Typography>
+          <Typography variant="h4">Progress</Typography>
         </Grid>
         <Grid item>
           <LinearProgressWithLabel value={80} />
