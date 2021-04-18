@@ -1,4 +1,10 @@
-import { Squad as SquadModel, User, Subject, Task } from "../../shared/models";
+import {
+  Squad as SquadModel,
+  User,
+  Subject,
+  Task,
+  Comment,
+} from "../../shared/models";
 
 export const user: User = {
   id: "user-1",
@@ -14,6 +20,50 @@ export const user: User = {
   squadIds: [],
   squads: [],
 };
+
+export const comments: Comment[] = [
+  {
+    id: "comment-1",
+    userId: "user-1",
+    taskId: "task-1",
+    isTaskComment: true,
+    isQuestion: true,
+    parentId: undefined,
+    text:
+      "Okay, sunlight gives a plant energy, but why does a plant need energy?",
+  },
+
+  {
+    id: "comment-2",
+    userId: "user-2",
+    taskId: "task-1",
+    isTaskComment: true,
+    isQuestion: true,
+    parentId: undefined,
+    text: "Do people photosynthesise too?",
+  },
+
+  {
+    id: "comment-3",
+    userId: "user-1",
+    taskId: "task-2",
+    isTaskComment: true,
+    isQuestion: true,
+    parentId: undefined,
+    text: "How can I understand pythag's theorem geometrically?",
+  },
+
+  {
+    id: "comment-4",
+    userId: "user-3",
+    taskId: "task-2",
+    isTaskComment: true,
+    isQuestion: false,
+    parentId: "comment-3",
+    text:
+      "Hey John! Here's a picture that might help: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Pythagorean.svg/390px-Pythagorean.svg.png",
+  },
+];
 
 export const subjects: Subject[] = [
   {
@@ -73,20 +123,14 @@ export const users: User[] = [
     squadIds: [],
     squads: [],
   },
-]
-
-
+];
 
 export const squads: SquadModel[] = [
   {
     id: "squad-1",
     name: "BioBrains",
     subjectId: "subject-1",
-    users: [
-      "user-1",
-      "user-2",
-      "user-3",
-    ],
+    users: ["user-1", "user-2", "user-3"],
     tasks: [
       {
         id: "task-1",

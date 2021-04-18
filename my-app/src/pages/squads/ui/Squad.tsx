@@ -12,22 +12,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import MeetSquad from "./MeetSquad";
 import EmptyDisplay from "../../../shared/components/EmptyDisplay";
 import UndrawChildren from "../../../shared/components/arty/UndrawChildren";
+import { UpperSubTitle } from "../../../shared/components";
+
 import styled from "styled-components";
+
+const SquadTasksTitle = styled(UpperSubTitle)`
+  margin-bottom: 16px;
+  // align with <Tab />
+  padding-left: 12px;
+`;
 
 type SquadProps = PropsWithChildren<{
   squad?: SquadModel;
   squadLoading: boolean;
 }>;
-
-
-const TasksTitle = styled.div`
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  // align with <Tab />
-  padding-left: 12px;
-  // 40%
-  color: #00000066;
-`;
 
 function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
   const [activeTaskIndex, setActiveTaskIndex] = useState<number>(0);
@@ -74,7 +72,7 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
         }}
         activeTabIndex={activeTaskIndex}
         onActiveTabIndexChange={setActiveTaskIndex}
-        tabsTitle={<TasksTitle>Squad Tasks</TasksTitle>}
+        tabsTitle={<SquadTasksTitle>Squad Tasks</SquadTasksTitle>}
         tabs={squad.tasks.map((t) => (
           <Tab label={getTaskDisplayName(t)} id={t.id} />
         ))}

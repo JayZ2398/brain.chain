@@ -1,4 +1,4 @@
-export type WithId<TObj = {}, TId = string> = TObj & { id: TId };
+import { WithId } from "../types";
 
 export type Subject = WithId & {
   name: string;
@@ -43,6 +43,10 @@ export type Task = WithId & {
 };
 
 export type Comment = WithId & {
+  userId: string;
+  parentId?: string;
+  isTaskComment: boolean;
+  taskId: string;
   isQuestion: boolean;
   text: string;
 };

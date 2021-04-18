@@ -39,7 +39,7 @@ export function someSquad(squadData: Partial<type.Squad>) {
 const defaultSubjectData: type.Subject = {
   id: "subject_id",
   name: "Math",
-  users: []
+  users: [],
 };
 export function someSubject(subjectData: Partial<type.Subject>) {
   return withId({ ...defaultSubjectData, ...subjectData });
@@ -47,6 +47,9 @@ export function someSubject(subjectData: Partial<type.Subject>) {
 
 const defaultCommentData: type.Comment = {
   id: "comment_id",
+  userId: "bob_dill",
+  taskId: "task_id",
+  isTaskComment: true,
   text: "Is the mitochondria the powerhouse of the cell?",
   isQuestion: true,
 };
@@ -61,7 +64,7 @@ const defaultTaskData: type.Task = {
     "What is the purpose of the mitochondria?\nHow do human cells produce energy?",
   comments: [someComment({})],
   due: "Next Friday",
-  squadId: "squad_id"
+  squadId: "squad_id",
 };
 export function someTask(taskData: Partial<type.Task>) {
   return withId({ ...defaultTaskData, ...taskData });

@@ -16,7 +16,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useUser from "../../shared/hooks/useUser";
 import { signInWithGoogle } from "../../shared/firebase/firebase";
-import useAPI from "../../shared/hooks/useAPI";
+
+import logo from "../../media/logo.svg";
+import loginBackground from "../../media/loginBackground.png";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    color: "white",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -32,6 +35,20 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
+  },
+  loginBackgroundImage: {
+    height: "100vh",
+  },
+  loginPanel: {
+    paddingLeft: "10%",
+    paddingRight: "10%",
+    backgroundColor: "white",
+  },
+  loginView: {
+    height: "100%",
+    backgroundColor: "#FDE3E4",
+    display: "grid",
+    gridTemplateColumns: "2fr 5fr",
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -83,7 +100,7 @@ function Copyright() {
 }
 
 const onLogin = () => {
-  return <Redirect to={"/about"} />;
+  return <Redirect to={"/dashboard"} />;
 };
 
 export default function LoginView() {
@@ -110,78 +127,90 @@ export default function LoginView() {
   return redirect ? (
     onLogin()
   ) : (
-    <Container component="main" maxWidth="xs">
+    <>
       <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={formValues.email}
-            onChange={handleInputChange}
+      <Box className={classes.loginView}>
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          className={classes.loginPanel}
+        >
+          <div className={classes.paper}>
+            {/* <LockOutlinedIcon /> */}
+            <img src={logo} alt="brain chain logo" />
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={formValues.email}
+                onChange={handleInputChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={formValues.password}
+                onChange={handleInputChange}
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                // Add an error pop up
+                onClick={() =>
+                  login(formValues.email, formValues.password)
+                    .then(() => setRedirect(true))
+                    .catch(() => {})
+                }
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="/" variant="body2" color="secondary">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/" variant="body2" color="secondary">
+                    Don't have an account? Sign Up
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+        </Grid>
+        <Box marginLeft="auto" marginRight="auto">
+          <img
+            className={classes.loginBackgroundImage}
+            src={loginBackground}
+            alt="cute art of student studying"
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={formValues.password}
-            onChange={handleInputChange}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            // Add an error pop up
-            onClick={() =>
-              login(formValues.email, formValues.password)
-                .then(() => setRedirect(true))
-                .catch(() => {})
-            }
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="/" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="/" variant="body2">
-                Don't have an account? Sign Up
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
+        </Box>
       </Box>
-    </Container>
+    </>
   );
 }
