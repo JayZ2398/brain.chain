@@ -2,15 +2,18 @@ import useDatabase from "./useDatabase";
 import "../models/fakeData";
 import { someUser } from "../models/fakeData";
 
-const REQUEST_DELAY_MILLISECONDS = 200;
+const REQUEST_DELAY_MILLISECONDS = 5000;
 
-const fakeDelay = () => setTimeout(() => {}, REQUEST_DELAY_MILLISECONDS);
+const sleep = (delay: number) =>
+  new Promise((resolve) => setTimeout(resolve, delay));
+
+const fakeDelay = async () => sleep(REQUEST_DELAY_MILLISECONDS);
 
 export default function useAPI() {
   const db = useDatabase();
 
   async function signUp(name: string, email: string, password: string) {
-    fakeDelay();
+    await fakeDelay();
     try {
       await db.createAccount({ email, password });
       const user = await db.createUser(someUser({ name, email }));
@@ -22,8 +25,10 @@ export default function useAPI() {
   }
 
   async function login(email: string, password: string) {
+    console.log("before sleep");
+    await sleep(5000);
+    console.log("after sleep");
     try {
-      fakeDelay();
       const account = await db.getAccount(email);
       const user = await db.getUser(account.email);
       if (password === account?.password) {
