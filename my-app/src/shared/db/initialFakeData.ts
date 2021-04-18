@@ -12,12 +12,16 @@ const biology = someSubject({ name: "Biology" });
 const history = someSubject({ name: "History" });
 export const fakeSubjects = [biology, history];
 
-
-const superStuds = someSquad({ name: "Super Studs"});
+const superStuds = someSquad({ name: "Super Studs" });
 const royalReaders = someSquad({ name: "Royal Readers" });
 export const fakeSquads = [superStuds, royalReaders];
 
 export const fakeUsers = [
+  someUser({
+    email: "poca@hontas.com",
+    name: "Pocahontas",
+    squads: [fakeSquads[0], fakeSquads[1]],
+  }),
   someUser({
     email: "jack@gmail.com",
     name: "Jack Zezula",
