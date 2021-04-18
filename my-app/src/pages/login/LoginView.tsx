@@ -170,7 +170,7 @@ export default function LoginView() {
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="secondary" />}
-                label="Remember me"
+                label={<Typography color="secondary">Remember me</Typography>}
               />
               <Button
                 // Add an error pop up
