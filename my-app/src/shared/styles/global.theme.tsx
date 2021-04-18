@@ -6,7 +6,7 @@ const GlobalTheme = createMuiTheme({
       main: "#FDE3E4",
     },
     secondary: {
-      main: "#7A7ECC",
+      main: "#646EFB",
     },
   },
   typography: {

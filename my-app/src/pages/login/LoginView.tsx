@@ -152,6 +152,7 @@ export default function LoginView() {
                 autoFocus
                 value={formValues.email}
                 onChange={handleInputChange}
+                color="secondary"
               />
               <TextField
                 variant="outlined"
@@ -165,9 +166,10 @@ export default function LoginView() {
                 autoComplete="current-password"
                 value={formValues.password}
                 onChange={handleInputChange}
+                color="secondary"
               />
               <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={<Checkbox value="remember" color="secondary" />}
                 label="Remember me"
               />
               <Button
