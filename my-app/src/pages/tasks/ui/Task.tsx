@@ -2,13 +2,16 @@ import React, { PropsWithChildren, useState } from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import { useDispatch, useEquivSelector } from "../../../shared/redux/hooks";
+import { nanoid } from "@reduxjs/toolkit";
 
-import { Task as TaskModel } from "../../../shared/models";
+import { Task as TaskModel, Comment, User } from "../../../shared/models";
 import DueIndicator from "./DueIndicator";
 import { UpperSubTitle } from "../../../shared/components";
 import TaskDiscussion from "../../tasks/ui/TaskDiscussion";
-import { comments } from "../../../shared/data";
+import { users } from "../../../shared/data";
 import AddComment from "../../comments/ui/AddComment";
+import { actions, selectComments } from "../../comments/slice";
 
 type TaskProps = PropsWithChildren<{
   taskLoading: boolean;
@@ -16,10 +19,26 @@ type TaskProps = PropsWithChildren<{
 }>;
 
 function Task({ task, ...rest }: TaskProps) {
+  const comments = useEquivSelector(selectComments);
   const taskComments = comments.filter((c) => c.taskId === task.id);
+  const dispatch = useDispatch();
+
+  const curUser: User = users[0];
 
   const [commentText, setCommentText] = useState<string | undefined>(undefined);
-  function handleSubmitComment() {}
+  function handleSubmitComment() {
+    if (!commentText) return;
+
+    const newComment: Comment = {
+      id: nanoid(),
+      userId: curUser.id,
+      isTaskComment: true,
+      taskId: task.id,
+      isQuestion: true,
+      text: commentText,
+    };
+    dispatch(actions.setComments([...comments, newComment]));
+  }
 
   return (
     <div {...rest}>
@@ -55,6 +74,7 @@ function Task({ task, ...rest }: TaskProps) {
                 value={commentText}
                 onChange={setCommentText}
                 onSubmit={handleSubmitComment}
+                submitDisabled={commentText === undefined}
                 style={{
                   width: "100%",
                 }}

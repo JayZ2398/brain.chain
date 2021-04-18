@@ -18,11 +18,18 @@ const Outer = styled.div`
 
 type AddCommentProps = WithStyle & {
   onSubmit: () => void;
+  submitDisabled?: boolean;
   value: string | undefined;
   onChange: (x: string | undefined) => void;
 };
 
-function AddComment({ onSubmit, value, onChange, ...rest }: AddCommentProps) {
+function AddComment({
+  onSubmit,
+  value,
+  onChange,
+  submitDisabled,
+  ...rest
+}: AddCommentProps) {
   return (
     <Outer {...rest}>
       <TextField
@@ -43,7 +50,7 @@ function AddComment({ onSubmit, value, onChange, ...rest }: AddCommentProps) {
           width: "100%",
         }}
       />
-      <IconButton color="primary" onClick={onSubmit}>
+      <IconButton disabled={submitDisabled} color="primary" onClick={onSubmit}>
         <SendIcon />
       </IconButton>
     </Outer>

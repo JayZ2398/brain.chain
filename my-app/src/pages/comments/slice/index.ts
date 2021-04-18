@@ -29,4 +29,4 @@ export const { actions } = comments;
 
 export default comments.reducer;
 
-export const selectComments = (state: RootState) => state.comments;
+export const selectComments = (state: RootState) => state.comments.comments;
