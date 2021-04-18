@@ -34,10 +34,17 @@ function Squad({ squad, squadLoading, children, ...rest }: SquadProps) {
     return (
       <EmptyDisplay
         style={{
-          gridColumns: "1 / 3",
+          gridColumn: "1 / 3",
+          width: "100%",
         }}
         text="You haven't been assigned to a squad yet! 🐱‍🚀🐱‍🚀"
-        picture={<UndrawChildren />}
+        picture={
+          <UndrawChildren
+            {...{
+              width: "50vw",
+            }}
+          />
+        }
       />
     );
 

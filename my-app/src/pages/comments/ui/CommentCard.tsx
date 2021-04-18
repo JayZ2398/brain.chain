@@ -3,24 +3,35 @@ import Avatar from "@material-ui/core/Avatar";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ReplyIcon from "@material-ui/icons/Reply";
+import IconButton from "@material-ui/core/IconButton";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 import { Comment, User } from "../../../shared/models";
 
 interface CommentCardProps {
   user: User;
   comment: Comment;
+  onReply: () => void;
 }
 
-export default function CommentCard({ comment, user }: CommentCardProps) {
+export default function CommentCard({
+  comment,
+  user,
+  onReply,
+  ...rest
+}: CommentCardProps) {
   return (
-    <ListItem>
+    <ListItem {...rest}>
       <ListItemAvatar>
-        <Avatar
-          alt="Jasmine"
-          src="https://images.unsplash.com/photo-1542297919088-a2b78b2c578b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-        />
+        <Avatar alt={user.name} src={user.displayPicture} />
       </ListItemAvatar>
       <ListItemText primary={user.name} secondary={comment.text} />
+      <ListItemSecondaryAction>
+        <IconButton onClick={onReply} edge="end" aria-label="delete">
+          <ReplyIcon />
+        </IconButton>
+      </ListItemSecondaryAction>
     </ListItem>
   );
 }
