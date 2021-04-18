@@ -8,7 +8,7 @@ type SubjectSelectProps = ComponentProps<typeof Select>;
 
 function SubjectSelect({ children, ...rest }: SubjectSelectProps) {
   return (
-    <Select {...rest}>
+    <Select placeholder="Subject" {...rest}>
       {subjects.map((s) => (
         <MenuItem value={s.id}> {s.name} </MenuItem>
       ))}

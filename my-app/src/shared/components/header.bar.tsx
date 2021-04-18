@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const LinkBehavior = React.forwardRef<any, Omit<RouterLinkProps, "to">>(
-  (props, ref) => <RouterLink ref={ref} to="/" {...props} />
+  (props, ref) => <RouterLink ref={ref} to="/dashboard" {...props} />
 );
 
 export default function ButtonAppBar() {
@@ -55,7 +55,7 @@ export default function ButtonAppBar() {
           <Box
             display="flex"
             flexDirection="row"
-            style={{justifyContent: "space-between"}}
+            style={{ justifyContent: "space-between" }}
             width="100%"
           >
             <Box display="flex">
@@ -78,7 +78,7 @@ export default function ButtonAppBar() {
               <img src={window.location.origin + "/logo.svg"} alt="Logo" />
             </Box>
 
-            <Button color="inherit" component={RouterLink} to="/">
+            <Button color="inherit" component={RouterLink} to="/dashboard">
               <Typography variant="h5" color="secondary">
                 Home
               </Typography>

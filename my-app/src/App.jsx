@@ -31,20 +31,20 @@ function App() {
                 {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
                 <Switch>
-                  <Route path="/login">
-                    <LoginView />
-                  </Route>
                   <Route path="/squads">
                     <ButtonAppBar />
                     <Page>
                       <Squads />
                     </Page>
                   </Route>
-                  <Route path="/">
+                  <Route path="/dashboard">
                     <ButtonAppBar />
                     <Page>
                       <DashboardPage />
                     </Page>
+                  </Route>
+                  <Route path="/">
+                    <LoginView />
                   </Route>
                 </Switch>
               </div>
