@@ -43,6 +43,8 @@ function Task({ task, ...rest }: TaskProps) {
     };
     if (replyingToCommentId) newComment.parentId = replyingToCommentId;
     dispatch(actions.setComments([...comments, newComment]));
+
+    setCommentText(undefined);
   }
 
   // TODO: memo
