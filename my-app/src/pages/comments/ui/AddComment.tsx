@@ -35,6 +35,7 @@ function AddComment({
   return (
     <Outer {...rest}>
       <TextField
+        color="secondary"
         value={value}
         onChange={unwrapValueThen(onChange)}
         multiline
@@ -51,7 +52,7 @@ function AddComment({
         }}
         {...textFieldProps}
       />
-      <IconButton disabled={submitDisabled} color="primary" onClick={onSubmit}>
+      <IconButton disabled={submitDisabled} color="secondary" onClick={onSubmit}>
         <SendIcon />
       </IconButton>
     </Outer>
