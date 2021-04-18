@@ -25,9 +25,6 @@ export default function useAPI() {
   }
 
   async function login(email: string, password: string) {
-    console.log("before sleep");
-    await sleep(5000);
-    console.log("after sleep");
     try {
       const account = await db.getAccount(email);
       const user = await db.getUser(account.email);

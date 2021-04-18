@@ -100,7 +100,7 @@ function Copyright() {
 }
 
 const onLogin = () => {
-  return <Redirect to={"/dashboard"} />;
+  return <Redirect to={"/"} />;
 };
 
 export default function LoginView() {
