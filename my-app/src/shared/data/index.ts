@@ -85,6 +85,19 @@ export const subjects: Subject[] = [
 
 export const users: User[] = [
   {
+    id: "poca",
+    email: "poca@hontas.com",
+    displayPicture:
+      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fdettoldisney.files.wordpress.com%2F2013%2F05%2Fpocahontas-disneyscreencaps-com-3632.jpg&f=1&nofb=1",
+    name: "Pocahontas",
+    subjectIds: ["subject-1", "subject-2", "subject-3"],
+    subjects: [],
+    commentIds: [],
+    comments: [],
+    squadIds: [],
+    squads: [],
+  },
+  {
     id: "user-1",
     email: "user-1@gmail.com",
     displayPicture:

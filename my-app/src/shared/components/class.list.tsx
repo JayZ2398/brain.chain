@@ -11,6 +11,8 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper"
 // import Avatar from "./avatar";
+import { users } from "../../shared/data";
+import { Task as TaskModel, Comment, User } from "../../shared/models";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,27 +36,28 @@ const useStyles = makeStyles((theme: Theme) =>
 const ClassList = () => {
   const classes = useStyles();
 
+  const curUser: User = users[0];
+
   return (
     <>
       <Box width="280px" padding="0px" paddingTop="50px" height="100%">
         <Box paddingLeft="15px" paddingBottom="30px">
           <Avatar
             alt="Jasmine"
-            src="https://images.unsplash.com/photo-1542297919088-a2b78b2c578b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+            src={curUser.displayPicture}
             className={classes.large}
           />
         </Box>
         <Box padding="15px">
-          <Typography variant="h5">Jasmine</Typography>
+          <Typography variant="h6">{curUser.name}</Typography>
           <Typography>Year 7, Morley High School</Typography>
         </Box>
         <Divider />
         <List>
           {["Account Settings", "Sign Out"].map((text) => (
-            <ListItem button key={text} >
+            <ListItem button key={text}>
               <Typography variant="subtitle2">
-                
-              <ListItemText primary={text} disableTypography/>
+                <ListItemText primary={text} disableTypography />
               </Typography>
             </ListItem>
           ))}
