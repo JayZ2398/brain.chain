@@ -12,6 +12,7 @@ import SubjectCard from "../../pages/subjects/ui/SubjectCard";
 import { getPriorityTask } from "../tasks/funcs";
 import { RequireField } from "../../shared/types";
 import { actions } from "../../pages/squads/slice";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 type SquadWithSubject = RequireField<Squad, "subject">;
 
@@ -33,6 +34,7 @@ export default function DashboardPage() {
 
   return (
     <Container maxWidth={"md"}>
+      <CssBaseline />
       <Grid container spacing={6} direction="column">
         <Grid item>
           <Typography variant="h4">Subjects</Typography>

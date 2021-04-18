@@ -8,6 +8,9 @@ const GlobalTheme = createMuiTheme({
     secondary: {
       main: "#646EFB",
     },
+    background: {
+      default: "#FDF7FF",
+    },
   },
   typography: {
     h6: {

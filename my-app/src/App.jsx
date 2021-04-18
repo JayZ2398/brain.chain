@@ -15,6 +15,8 @@ import DatabaseContext, {
 } from "./shared/contexts/DatabaseContext";
 import Database from "./shared/db/db";
 import "./App.css";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
 
 import store from "./shared/redux/store";
 
@@ -23,6 +25,7 @@ import Page from "./shared/components/Page";
 function App() {
   return (
     <DatabaseContextProvider>
+      <CssBaseline />
       <UserProvider>
         <Router>
           <ReduxProvider store={store}>
