@@ -21,6 +21,7 @@ type AddCommentProps = WithStyle & {
   submitDisabled?: boolean;
   value: string | undefined;
   onChange: (x: string | undefined) => void;
+  textFieldProps: any;
 };
 
 function AddComment({
@@ -28,6 +29,7 @@ function AddComment({
   value,
   onChange,
   submitDisabled,
+  textFieldProps,
   ...rest
 }: AddCommentProps) {
   return (
@@ -35,8 +37,6 @@ function AddComment({
       <TextField
         value={value}
         onChange={unwrapValueThen(onChange)}
-        label="Task question"
-        placeholder="All questions are good questions!"
         multiline
         variant="outlined"
         InputProps={{
@@ -49,6 +49,7 @@ function AddComment({
         style={{
           width: "100%",
         }}
+        {...textFieldProps}
       />
       <IconButton disabled={submitDisabled} color="primary" onClick={onSubmit}>
         <SendIcon />

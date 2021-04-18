@@ -26,6 +26,10 @@ function Task({ task, ...rest }: TaskProps) {
   const curUser: User = users[0];
 
   const [commentText, setCommentText] = useState<string | undefined>(undefined);
+  const [replyingToCommentId, setReplyingToComment] = useState<
+    string | undefined
+  >();
+
   function handleSubmitComment() {
     if (!commentText) return;
 
@@ -37,7 +41,15 @@ function Task({ task, ...rest }: TaskProps) {
       isQuestion: true,
       text: commentText,
     };
+    if (replyingToCommentId) newComment.parentId = replyingToCommentId;
     dispatch(actions.setComments([...comments, newComment]));
+  }
+
+  // TODO: memo
+  const replyingToComment = comments.find((c) => c.id === replyingToCommentId);
+  const replyingToUser = users.find((u) => u.id === replyingToComment?.userId);
+  function handleCommentReply(commentId: string) {
+    setReplyingToComment(commentId);
   }
 
   return (
@@ -60,9 +72,18 @@ function Task({ task, ...rest }: TaskProps) {
 
         <Grid item>
           <Grid container spacing={4}>
-            <Grid item>
+            <Grid
+              style={{
+                width: "100%",
+              }}
+              item
+            >
               <UpperSubTitle> Discussion </UpperSubTitle>
-              <TaskDiscussion comments={taskComments} task={task} />
+              <TaskDiscussion
+                comments={taskComments}
+                task={task}
+                onCommentReply={handleCommentReply}
+              />
             </Grid>
             <Grid
               style={{
@@ -71,6 +92,14 @@ function Task({ task, ...rest }: TaskProps) {
               item
             >
               <AddComment
+                textFieldProps={{
+                  label: !replyingToComment
+                    ? "Task question"
+                    : `Reply to ${(replyingToUser as User)?.name}`,
+                  placeholder: !replyingToComment
+                    ? "All questions are good questions!"
+                    : `Say anything`,
+                }}
                 value={commentText}
                 onChange={setCommentText}
                 onSubmit={handleSubmitComment}

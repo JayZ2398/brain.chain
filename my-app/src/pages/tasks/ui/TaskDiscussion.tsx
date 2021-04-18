@@ -13,6 +13,7 @@ interface TaskDiscussionProps {
   task: Task;
   comments: Comment[];
   loading?: boolean;
+  onCommentReply: (commentId: string) => void;
 }
 
 interface CommentCardStyledProps {
@@ -30,6 +31,7 @@ function TaskDiscussion({
   task,
   comments,
   loading,
+  onCommentReply,
   ...rest
 }: TaskDiscussionProps) {
   if (loading) return <div> loadign </div>;
@@ -37,12 +39,13 @@ function TaskDiscussion({
   const userDict = useKeyById(users) as Dict<User>;
 
   return (
-    <List component="nav">
+    <List {...rest} component="nav">
       {comments.map((c) => (
         <CommentCardStyled
           user={userDict[c.userId]}
           comment={c}
           isChild={c.parentId !== undefined}
+          onReply={() => onCommentReply(c.id)}
         />
       ))}
     </List>
